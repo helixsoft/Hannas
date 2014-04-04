@@ -694,6 +694,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		text-align: center;
 		font-weight: 900;
 		color: rgba(0,0,0,1);
+		margin-top: 0px;
 	}
 	.contributors-box .thumbnail-image-cont img{
 		width: 243px;
