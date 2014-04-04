@@ -278,6 +278,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		position: relative;
 		z-index: 20;
 		top: 272px;
+		overflow: hidden;
 	}
 	.container.down{
 		top: 0px;
@@ -287,6 +288,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		height: 74px;
 		padding: 8px 0px;
 		width: 100%;
+		position: relative;
+		z-index: 1000;
 	}
 	.logo{
 		width: 116px;
@@ -313,6 +316,61 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		border-right: 1px solid #cdcdcd;
 		line-height: 11px;
 		margin-bottom: 2px;
+		
+	}
+	nav li ul.sub-menu{
+		width: 849px;
+		height: 0px;
+		position: absolute;
+		left: 0px;
+		background: #fff;
+		min-height: 0px;
+		z-index: 1000;
+		-webkit-transition: all 1000ms ease-out;
+	    -moz-transition: all  1000ms ease-out;
+	    -o-transition: all  1000ms ease-out;
+	   	top:76px;
+	   	opacity: 0;
+	   	overflow: hidden;
+	}
+	nav li:hover ul.sub-menu{
+		height: 150px;
+		opacity: 1;
+	}
+	nav li ul.sub-menu .col{
+		width: 212.25px;
+		height: auto;
+		float: left;
+	}
+	nav li ul.sub-menu .sub-menu-text{
+		line-height: 1;
+		font-size: 14px;
+		font-weight: 400;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		color: #585757;
+		margin-left: 10px;
+	}
+	nav li ul.sub-menu li{
+		display: block;
+		float: none;
+		border:none; 
+		margin-bottom: 10px;
+		margin-left: 0px;
+	}
+	nav li ul.sub-menu li a{
+		text-align: left;
+		font-size: 14;
+		font-weight: 400;
+		line-height: 1;
+		color: #424242;
+	}
+	nav li ul.sub-menu li:hover a{
+		text-decoration: underline;
+		font-size: 14;
+		font-weight: 400;
+		line-height: 1;
+		color: #424242;
 	}
 	nav li:last-child{
 		border-right: 1px solid #fff;
@@ -678,7 +736,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		padding-bottom: 12px;
 	}
 	nav.blog_nav ul{
-		width: 410px;
+		width: 414px;
 		height: 13px;
 		margin: 0 auto;
 	}
@@ -688,6 +746,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		border:none;
 		line-height: 11px;
 		margin-bottom: 2px;
+		position: relative;
 	}
 	nav.blog_nav li a{
 		text-transform: uppercase;
@@ -698,6 +757,37 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		text-align: center;
 		vertical-align: top;
 		display: block;
+		padding-bottom: 16px;
+	}
+	nav.blog_nav li a span{
+		width: 7px;
+		height: 7px;
+		display: inline-block;
+		background: url(images/menu-arrow.png) 0px 0px no-repeat;
+		margin-left: 5px;
+	}
+	nav.blog_nav li:hover a span{
+		background: url(images/menu-arrow.png) -7px 0px no-repeat;
+	}
+	nav.blog_nav li ul.sub-menu{
+		width: 200px;
+		height: auto;
+		padding: 20px 10px;
+		background: rgba(0,0,0,0.88);
+		position: absolute;
+		top: 26px;
+		display: none;
+		overflow: auto;
+	}
+	nav.blog_nav li:hover ul.sub-menu{
+		display: block;
+	}
+	nav.blog_nav li ul.sub-menu li a{
+		padding-bottom:0px;
+		font-size: 12px;
+		font-weight: 300;
+		line-height: 1;
+		color: #fff;
 	}
 	.title{
 		font-size: 36px;
@@ -771,6 +861,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	.comment-area{
 		width: 100%;
 		height: auto;
+		display: none;
 	}
 	.comment-area .comment-item{
 		width: 100%;
@@ -882,4 +973,20 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	   font-size: 12px;
 		font-weight: 300;
 		color: #9b9b9b;
+	}
+	.latest-text{
+		margin-top: 20px;
+		margin-left: 25px;
+		line-height: 1;
+		font-size: 16;
+		font-weight: 400;
+		color: #383838;
+	}
+	#container{
+		margin-top: 30px;
+	}
+	.item { width: 277px; margin-bottom: 10px;}
+	.item img{ width: 277px; }
+	.extra{
+		margin-bottom: 100px;
 	}

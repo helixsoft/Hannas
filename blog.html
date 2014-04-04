@@ -10,6 +10,8 @@
   	<script src="js/jquery.min.js"></script>
     <script src="js/modernizr.js"></script>
     <script src="js/SmoothScroll.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
+    <script src="js/main.js"></script>
 </head>
 <body>
 	<div class="back_ads"><img src="images/ads.jpg"></div>	
@@ -17,7 +19,33 @@
 		<header>
 			<div class="logo"><a href=""><img src="images/hannasroom_logo.png"></a></div>
 			<nav>
-				<li><a href="#">BLOGS</a></li>
+				<li>
+					<a href="#">BLOGS</a>
+					<ul class="sub-menu">
+						<div class="sub-menu-text">our blogs</div>
+						<div class="col">
+							<li><a href="#">HANNAS ROOM</a></li>
+							<li><a href="#">THE ACCESSORY BLOG</a></li>
+							<li><a href="#">AMELIES HEALTH BLOG</a></li>
+							<li><a href="#">MATILDAS CORNER</a></li>
+						</div>
+						<div class="col">
+							<li><a href="#">THE FASHION BLOG</a></li>
+							<li><a href="#">KAROLINAS FOOD BLOG</a></li>
+							<li><a href="#">KIAFOTO</a></li>
+							<li><a href="#">BILLIE THE KID</a></li>
+						</div>
+						<div class="col">
+							<li><a href="#">FRIDAS BEAUTY BLOG</a></li>
+							<li><a href="#">NIKLAS FASHION BLOG</a></li>
+							<li><a href="#">JENNIEYOGA</a></li>
+							<li><a href="#">THE STREET ARTIST</a></li>
+						</div>
+						<div class="col">
+							<a href="#"><img src="images/hannasroom_logo.png"></a>
+						</div>
+					</ul>
+				</li>
 				<li><a href="#">BEAUTY</a></li>
 				<li><a href="#">FASHION</a></li>
 				<li><a href="#">INTERIOR</a></li>
@@ -31,9 +59,39 @@
 			<nav class="blog_nav">
 				<ul>
 					<li><a href="#">about HANNA</a></li>
-					<li><a href="#">LATEST POSTS</a></li>
-					<li><a href="#">CATEGORIES</a></li>
-					<li><a href="#">ARCHIVES</a></li>
+					<li>
+						<a href="#">LATEST POSTS<span class="arrow"></span></a>
+						<ul class="sub-menu">
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">CATEGORIES<span class="arrow"></span></a>
+						<ul class="sub-menu">
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">ARCHIVES<span class="arrow"></span></a>
+						<ul class="sub-menu">
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+							<li><a href="#">Happy Friday</a></li>
+						</ul>
+					</li>
 				</ul>
 			</nav>
 			<h1 class="title" align="center"><a href="#">PINK ROOM</a></h1>
@@ -49,7 +107,9 @@
 				<p align="middle"><img src="images/bloginer1.jpg" width="590" height="885" ></p>
 				<p align="middle"><img src="images/bloginer2.jpg" align="middle"></p>
 			</div>
-			<div class="blog-info"><span>DATE</span> 2013-09-11  | <span>CATEGORY</span> <a href="#">interior</a>, <a href="#">design</a>  | <span>TAGS</span> <a href="#">pink</a>, <a href="#">rooms</a>, <a href="#">parfume</a>, <a href="#">bottles</a> | <span>SHARES</span></div>
+			<div class="blog-info">
+				<span>DATE</span> 2013-09-11  | <span>CATEGORY</span> <a href="#">interior</a>, <a href="#">design</a>  | <span>TAGS</span> <a href="#">pink</a>, <a href="#">rooms</a>, <a href="#">parfume</a>, <a href="#">bottles</a> | <span>SHARES</span>
+			</div>
 			<div class="comments clearfix">
 				<div class="comment-count">8 COMMENTS</div>
 				<div class="toggle-comment"><span>SHOW</span> COMMENTS</div>
@@ -115,7 +175,8 @@
 						<p>LOVE YOUR BLOG! It’s amazing. So many great inspirational tips.<br/><br/><br/>Thanks!!!</p>
 					</div>
 				</div>
-				<div class="comment-form-area">
+			</div>
+			<div class="comment-form-area">
 					<div class="comment-text">YOUR COMMENT</div>
 					<form>
 						<input type="text" name="name" placeholder="NAME">
@@ -124,8 +185,30 @@
 						<textarea name="message" placeholder="YOUR COMMENT"></textarea>
 						<input type="submit" value="SUBMIT"> 
 					</form>
-				</div>
 			</div>
+			<div class="latest-text">LATEST POSTS</div>
+			<div id="container">
+				  <div class="item"><a href=""><img src="images/late1.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late2.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late3.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late4.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late5.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late6.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late7.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late8.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late9.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late10.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late11.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late12.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late13.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late14.jpg"></a></div>
+				  <div class="item"><a href=""><img src="images/late15.jpg"></a></div>
+			</div>
+			<footer class="clearfix extra">
+				<hr class="big-line"></hr>
+				<div class="left">copyright 2014 Hannasroom</div>
+				<div class="right">something else maybe</div>
+			</footer>
 		</div>
 	</div>
 </body>
