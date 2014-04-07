@@ -10,7 +10,7 @@ $(document).ready(function(){
 	var container = document.querySelector('#container');
 	var msnry = new Masonry( container, {
 	  // options
-	  columnWidth: 276,
+	  columnWidth: 265,
 	  gutter: 10,
 	  itemSelector: '.item'
 	});
