@@ -1,4 +1,11 @@
 $(document).ready(function(){
+	unloadScrollBars();
+	function unloadScrollBars() {
+	    document.documentElement.style.overflow = 'hidden';  // firefox, chrome
+	    document.body.scroll = "no"; // ie only
+	}
+	$( '#dl-menu' ).dlmenu();
+	$( '#blog-menu' ).dlmenu();
 	if( !device.tablet() && !device.mobile() ) {
 		$('.toggle-comment').on('click',function(){
 			if($('.comment-area').css('display')=='none'){
@@ -12,16 +19,13 @@ $(document).ready(function(){
 		$('.toggle-comment span').html('');
 		$('.comment-area').show();
 	}
-	/* only play video on desktop devices */
-	if( !device.tablet() && !device.mobile() ) {
-		var container = document.querySelector('#container');
-		var msnry = new Masonry( container, {
-		  // options
-		  columnWidth: $(document).width() > 800 ? 265 : $(document).width() >= 600 ? 275 : 145 ,
-		  gutter: 10,
-		  itemSelector: '.item'
-		});
-	}
+	var container = document.querySelector('#container');
+	var msnry = new Masonry( container, {
+	  // options
+	  columnWidth: $(document).width() > 800 ? 265 : $(document).width() >= 600 ? 275 : 145 ,
+	  gutter: 10,
+	  itemSelector: '.item'
+	});
 });
 
 
