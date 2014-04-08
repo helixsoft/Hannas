@@ -1436,3 +1436,278 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			width: 275px;
 		}
 	}
+	@media only screen and (min-width: 320px) and (max-width: 599px){
+		.container{
+			width: 300px;
+			padding: 0 10px 43px 10px;
+		}
+		nav{
+			display: none;
+		}
+		.latest{
+			height: 460px;
+			margin-bottom: 28px;
+		}
+		.latest .col{
+			width: 300px;
+			height: 228px;
+			margin-right: 0px;
+			display: block;
+			margin-bottom: 28px;
+		}
+		.latest .col:last-child{
+			margin-right: 0px;
+			width: 300px;
+			margin-bottom: 0px;
+		}
+
+		.latest .col .thumbnail-image-large{
+			width: 300px;
+			height: 228px;
+		}
+		.latest .col .thumbnail-image-large .hover-area{
+			width: 300px;
+			height: 228px;
+		}
+		.latest .col .thumbnail-image-large .hover-area .count{
+			font-size: 200px;
+			width: 300px;
+		}
+		.latest .col .thumbnail-image-large .hover-area .text-area {
+			width: 300px;	
+		}
+		.latest .col .thumbnail-image-large .hover-area .text-area .title{
+			font-size: 18px;
+		}
+		
+		.latest .col .thumbnail-image-large .hover-area .text-area .author{
+			font-size: 12px;
+		}
+		.latest .col .thumbnail-image-large img{
+			width: 300px;
+			height: 228px;
+			max-height: 228px;
+		}
+		.latest .col .thumbnail-image-small{
+			width: 136px;
+			height: 88px;
+		}
+
+		.latest .col .thumbnail-image-small .hover-area{
+			width: 136px;
+			height: 88px;
+		}
+		.latest .col .thumbnail-image-small .hover-area .count{
+			font-size: 100px;
+			width: 136px;
+		}
+		.latest .col .thumbnail-image-small .hover-area .text-area {
+			width: 136px;			
+		}
+		.latest .col .thumbnail-image-small .hover-area .text-area .title{
+			font-size: 12px;
+		}		
+		.latest .col .thumbnail-image-small .hover-area .text-area .author{
+			font-size: 8px;
+			margin-top: 5px;
+		}
+		.latest .col .thumbnail-image-small img{
+			width: 136px;
+			height: 88px;
+			max-height: 88px;
+		}
+		.latest .col .thumbnail-image-small:nth-child(1){
+			margin-right: 28px;
+			margin-bottom: 28px;
+		}
+		.latest .col .thumbnail-image-small:nth-child(2){
+			margin-right: 0px;
+			margin-bottom: 28px;
+		}
+		.latest .col .thumbnail-image-small:nth-child(3){
+			margin-right: 28px;
+			margin-bottom: 0px;
+		}
+		.latest .col .thumbnail-image-small:nth-child(4){
+			margin-right: 0px;
+			margin-bottom: 0px;
+		}
+		.featured{
+			height: 141px;
+			width: 300px;
+		}
+		.featured a{
+			width: 200px;
+			height: 105px;
+			margin: 18px auto;
+		}
+		.featured img{
+			width: 200px;
+			height: 105px;
+		}
+		.featured .hover-area{
+			width: 200px;
+			height: 105px;
+			position: absolute;
+			top:18px;
+		}
+		.featured .hover-area .count{
+			font-size: 105px;
+			width: 200px;
+		}
+		.featured .hover-area .text-area {
+			width: 200px;
+		}
+		.featured .hover-area .text-area .title{
+			font-size: 17px;
+			text-align: center;
+			font-weight: 300;
+			color: rgba(0,0,0,0.7);
+			font-family: 'Lato', sans-serif;
+			font-style: normal;
+		}
+		
+		.featured .hover-area .text-area .author{
+			font-size: 12px;
+			text-align: center;
+			font-weight: 400;
+			margin-top: 10px;
+			color: rgba(0,0,0,0.7);
+		}
+		.pick{
+			height: 470px;
+		}
+		.pick .thumbnail-image-pick{
+			width: 145px;
+			height: 110px;
+		}
+		.pick .thumbnail-image-pick img{
+			width: 145px;
+			height: 110px;
+		}
+		.pick .thumbnail-image-pick .hover-area{
+			width: 145px;
+			height: 110px;
+		}
+		.pick .thumbnail-image-pick .hover-area .text-area{
+			width: 145px;
+			height: 110px;
+		}
+		.pick .thumbnail-image-pick .hover-area .count{
+			width: 145px;
+			font-size: 110px;
+		}
+		.pick .thumbnail-image-pick:nth-child(-n+4){
+			margin-bottom: 0px;
+		}
+		.pick .thumbnail-image-pick:nth-child(-n+6){
+			margin-bottom: 10px;
+		}
+		.pick .thumbnail-image-pick{
+			margin-right: 10px !important;
+		}
+		.pick .thumbnail-image-pick:nth-child(2n+2){
+			margin-right: 0px !important;
+		}
+		.contributors{
+			height: 650px;
+		}
+		.contributors-box .thumbnail-image-cont:nth-child(2n+2){
+			margin-right: 0px !important;
+		}
+		.contributors-box .thumbnail-image-cont{
+			margin-right: 10px !important;
+			margin-bottom: 10px;
+			width: 121px;
+			height: 97px;
+		}
+		.contributors-box .thumbnail-image-cont img{
+			width: 121px;
+			height: 97px;
+			max-width: 121px;
+		}
+		.contributors-box .thumbnail-image-cont .hover-area{
+			width: 121px;
+			height: 97px;
+		}
+		.contributors-box .thumbnail-image-cont .hover-area .count{
+			font-size: 97px;
+			width: 121px;
+		}
+		.contributors-box .thumbnail-image-cont .hover-area .text-area{
+			width: 121px;
+		}
+		.contributors-box .thumbnail-image-cont .hover-area .text-area .title{
+			font-size: 16px;
+		}
+		.contributors-box .thumbnail-image-cont .hover-area .text-area .author{
+			font-size: 10px;
+		}
+		.contributors-text{
+			margin-left: 0;
+		}
+		nav li ul.sub-menu .sub-menu-text{
+			margin-left: 0px;
+		}
+		nav li ul.sub-menu{
+			width: 560px;
+		}
+		nav li ul.sub-menu .col{
+			width: 140px;
+		}
+		.blog_logo img{
+			width: 300px;
+			height: auto;
+		}
+		.my-content p.center{
+			padding: 0;
+		}
+		.my-content p img{
+			width: 186px;
+			height: auto;
+		}
+		.comment-area .comment-item .comment-item-left-part{
+			width: 70px;
+		}
+		.comment-area .comment-item .comment-item-right-part{
+			width: 194px;
+		}
+		.comment-form-area{
+			width: 300px;
+			height: auto;
+		}
+		.comment-form-area input[type="text"], .comment-form-area input[type="email"]{
+			max-width: 290px;
+			width: 290px;
+			display: inline-block;
+			float: none;
+		}
+		.comment-form-area textarea{
+			width: 290px;
+			float: none;
+			display: block;
+		}
+		.latest-text{
+			margin-left: 0px;
+		}
+		.item{
+			width: 145px;
+		}
+		.item img{ width: 145px; }
+		.item .hover-area{
+			width: 145px;
+		}
+		.item .hover-area .count{
+			width: 145px;
+		}
+		.item .hover-area .text-area {
+			width: 145px;
+		}
+		.blog-info span{
+			display: block;
+			float: none;
+		}
+		.comments{
+			padding: 0;
+		}
+	}
