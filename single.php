@@ -1,10 +1,11 @@
 <?php
 /**
- * The main template file.
+ * The Template for displaying all single posts.
+ *
  */
 
-get_header();?>
-		<div class="blog_container">
+get_header(); ?>
+<div class="blog_container">
 			<div class="blog_logo" align="center">
 				<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 					<?php if(ot_get_option( 'blog_logo')) { ?>
@@ -18,14 +19,10 @@ get_header();?>
 				get_template_part( 'blog-nav');
 			?>
 			<?php
-				if ( have_posts() ) :
-					// Start the Loop.
-					while ( have_posts() ) : the_post();
-						get_template_part( 'content', get_post_format() );
-					endwhile;
-					else :
-					// If no content, include the "No posts found" template.
-					get_template_part( 'content', 'none' );
-				endif;
+				// Start the Loop.
+				while ( have_posts() ) : the_post();
+					get_template_part( 'single-page', get_post_format() );
+					comments_template();
+				endwhile;
 			?>
-<?php get_footer();?>
+<?php get_footer(); ?>

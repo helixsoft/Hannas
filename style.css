@@ -662,6 +662,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-weight: 400;
 		margin-top: 10px;
 		color: rgba(0,0,0,0.7);
+		text-transform: uppercase;
 	}
 	.pick{
 		width: 100%;
@@ -742,6 +743,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-weight: 400;
 		margin-top: 10px;
 		color: rgba(0,0,0,0.7);
+		text-transform: uppercase;
 	}
 	.pick .thumbnail-image-pick:nth-child(4n+4){
 		margin-right: 0px;
@@ -978,9 +980,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-style: italic;
 		margin-top: 28px;
 		font-family: Georgia, serif;
+		text-transform: uppercase;
 	}
 	.title a{
 		text-decoration: none;
+		text-transform: uppercase;
 	}
 	.date{
 		font-size: 12px;
@@ -1006,12 +1010,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-family: 'Times New Roman', Times, serif;
 		color:#383838;
 	}
-	.my-content p.center{
+	.my-content p{
 		padding: 0 150px;
 	}
 	.my-content img{
 		text-align: center;
-		margin-bottom: 20px;
 	}
 	.blog-info{
 		font-size: 12px;
@@ -2412,6 +2415,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			color: rgba(0,0,0,0.7);
 			font-family: 'Lato', sans-serif;
 			font-style: normal;
+			margin-top: 0px;
+			text-transform: uppercase;
 		}
 		
 		.featured .hover-area .text-area .author{
@@ -2420,6 +2425,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			font-weight: 400;
 			margin-top: 10px;
 			color: rgba(0,0,0,0.7);
+			text-transform: uppercase;
 		}
 		.pick{
 			height: 283px;
@@ -2624,6 +2630,8 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			color: rgba(0,0,0,0.7);
 			font-family: 'Lato', sans-serif;
 			font-style: normal;
+			margin-top: 0px;
+			text-transform: uppercase;
 		}
 		
 		.featured .hover-area .text-area .author{
@@ -2632,6 +2640,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			font-weight: 400;
 			margin-top: 10px;
 			color: rgba(0,0,0,0.7);
+			text-transform: uppercase;
 		}
 		.pick{
 			height: 470px;

@@ -2,7 +2,7 @@
 	<div class="contributors clearfix">
 		<div class="container down">
 			<?php if ( function_exists( 'ot_get_option' ) ) { ?>
-				<?php if(ot_get_option( 'contributors_on_off','on')=='on') { ?>
+				<?php if(ot_get_option( 'contributors_on_off')=='on') { ?>
 					<h1 class="contributors-text">CONTRIBUTORS</h1>
 					<div class="contributors-box clearfix">
 						<div class="thumbnail-image-cont">

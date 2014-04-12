@@ -30,6 +30,21 @@ function custom_theme_options() {
       )
     ),
     'settings'        => array( 
+             array(
+        'id'          => 'blog_logo',
+        'label'       => __( 'Blog Logo', 'Hannas' ),
+        'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/bloglogo.png'> width='333'") ),
+        'std'         => '',
+        'type'        => 'upload',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
+      ),
          array(
         'id'          => 'first_on_off',
         'label'       => __( 'On/Off', 'Hannas' ),
