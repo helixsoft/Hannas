@@ -1,4 +1,4 @@
-$(document).ready(function(){
+(function($){
 	unloadScrollBars();
 	function unloadScrollBars() {
 	    document.documentElement.style.overflow = 'hidden';  // firefox, chrome
@@ -22,10 +22,10 @@ $(document).ready(function(){
 	var container = document.querySelector('#container');
 	var msnry = new Masonry( container, {
 	  // options
-	  columnWidth: $(document).width() > 800 ? 265 : $(document).width() >= 600 ? 275 : 145 ,
+	  columnWidth: jQuery(document).width() > 800 ? 265 : jQuery(document).width() >= 600 ? 275 : 145 ,
 	  gutter: 10,
 	  itemSelector: '.item'
 	});
-});
-
+})(jQuery);
+	
 
