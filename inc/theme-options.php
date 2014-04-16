@@ -33,7 +33,7 @@ function custom_theme_options() {
              array(
         'id'          => 'blog_logo',
         'label'       => __( 'Blog Logo', 'Hannas' ),
-        'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/bloglogo.png'> width='333'") ),
+        'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/bloglogo.png' width='333' >") ),
         'std'         => '',
         'type'        => 'upload',
         'section'     => 'theme_settings',
@@ -45,6 +45,88 @@ function custom_theme_options() {
         'condition'   => '',
         'operator'    => 'and'
       ),
+        array(
+        'id'          => 'page_name',
+        'label'       => __( 'About Page Text', 'Hannas' ),
+        'desc'        => __( 'Select page Text', 'Hannas' ),
+        'std'         => 'about HANNA',
+        'type'        => 'text',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
+      ),
+        array(
+        'id'          => 'page_select',
+        'label'       => __( 'Page Select', 'Hannas' ),
+        'desc'        => __( 'Select About Page', 'Hannas' ),
+        'std'         => '',
+        'type'        => 'page-select',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
+      ),
+        array(
+        'id'          => 'blog_archive_select',
+        'label'       => __( 'Blog Archive', 'Hannas' ),
+        'desc'        => __( 'The Select Archive list you want', 'Hannas' ),
+        'std'         => 'yearly',
+        'type'        => 'select',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and',
+        'choices'     => array( 
+          array(
+            'value'       => 'yearly',
+            'label'       => __( 'yearly', 'Hannas' ),
+            'src'         => ''
+          ),
+          array(
+            'value'       => 'monthly',
+            'label'       => __( 'monthly', 'Hannas' ),
+            'src'         => ''
+          ),
+           array(
+            'value'       => 'weekly',
+            'label'       => __( 'weekly', 'Hannas' ),
+            'src'         => ''
+          ),
+          array(
+            'value'       => 'daily',
+            'label'       => __( 'daily', 'Hannas' ),
+            'src'         => ''
+          ),
+        )
+      ),
+        array(
+            'id'          => 'archive_number_slider',
+            'label'       => __( 'Number of archive', 'Hannas' ),
+            'desc'        => __( 'Select Number of archive', 'Hannas' ),
+            'std'         => '6',
+            'type'        => 'numeric-slider',
+            'section'     => 'theme_settings',
+            'rows'        => '',
+            'post_type'   => '',
+            'taxonomy'    => '',
+            'min_max_step'=> '1,10,1',
+            'class'       => '',
+            'condition'   => '',
+            'operator'    => 'and'
+          ),
          array(
         'id'          => 'first_on_off',
         'label'       => __( 'On/Off', 'Hannas' ),

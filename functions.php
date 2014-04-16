@@ -74,38 +74,56 @@ function Hannas_paging_nav() {
 endif;
 
 /**
- * Required: include OptionTree.
+ * Loads a set of CSS and/or Javascript documents. 
  */
+function Hannas_enqueue_admin_scripts($hook) {
+	wp_register_style( 'ot-admin-custom', get_template_directory_uri() . '/inc/css/ot-admin-custom.css' );
+	if ( $hook == 'appearance_page_ot-theme-options' ) {
+		wp_enqueue_style( 'ot-admin-custom' );
+	}
+
+	wp_register_style( 'admin.custom', get_template_directory_uri() . '/inc/css/admin.custom.css' );
+	if( $hook != 'edit.php' && $hook != 'post.php' && $hook != 'post-new.php' ) 
+		return;
+	wp_enqueue_style( 'admin.custom' );
+}
+add_action( 'admin_enqueue_scripts', 'Hannas_enqueue_admin_scripts' );
+/**
+ * Optional: set 'ot_show_pages' filter to false.
+ * This will hide the settings & documentation pages.
+ */
+add_filter( 'ot_show_pages', '__return_false' );
 
 /**
- * Theme Mode
+ * Optional: set 'ot_show_new_layout' filter to false.
+ * This will hide the "New Layout" section on the Theme Options page.
  */
-add_filter( 'ot_theme_mode', '__return_false' );
+add_filter( 'ot_show_new_layout', '__return_false' );
 
-include_once( trailingslashit( get_template_directory() ) . 'inc/theme-options.php' );
+/**
+ * Required: set 'ot_theme_mode' filter to true.
+ */
+add_filter( 'ot_theme_mode', '__return_true' );
+
+/**
+ * Required: include OptionTree.
+ */
+include_once( trailingslashit( get_template_directory() ) . 'option-tree/ot-loader.php' );
+if( is_multisite() ):
+	if(is_main_site( get_current_blog_id() )){
+		include_once( trailingslashit( get_template_directory() ) . 'inc/theme-options.php' );
+	}else{
+		include_once( trailingslashit( get_template_directory() ) . 'inc/sub-theme-options.php' );
+	}
+endif; 
 include_once( trailingslashit( get_template_directory() ) . 'inc/resize.php' );
 // Get URL of first image in a post
-function catch_first_post_image() {
-  global $post, $posts;
+function catch_first_post_image($post) {
   $first_img = '';
-  ob_start();
-  ob_end_clean();
   $output = preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $post->post_content, $matches);
   if(isset($matches[1][0])){
   	$first_img = $matches [1][0];
-  	$width = 150;                                                                  // Optional. Defaults to '150'
-	$height = 150;                                                                 // Optional. Defaults to '150'
-	$crop = true;                                                                  // Optional. Defaults to 'true'
-	$retina = false;                                                               // Optional. Defaults to 'false'
-
-	// Call the resizing function (returns an array)
-	$image = matthewruddy_image_resize( $first_img, $width, $height, $crop, $retina );
-	//print_r($image);
-	if ( is_wp_error( $image ) ) {
-	    echo $image->get_error_message();        // Displays error message returned from resizing function
-	} else {
-	   return $image['url'];          // Everything appears to have gone well. Continue as normal!
-	}
+	   return $first_img;          // Everything appears to have gone well. Continue as normal!
   }
 }
 function list_blog(){
@@ -183,17 +201,20 @@ function list_post($name){
 	foreach ($result as $key) {
 		switch_to_blog($key->blog_id);
 		$post = get_post($key->ID);
-		$attachments = get_children(array('post_parent'=>$post->ID));
-		$nbImg = count($attachments);
+		preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
+		$nbImg=count($result[0]);
 		?>
 		<div class="thumbnail-image-pick">
 			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
 				<?php 
+					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
 						echo get_the_post_thumbnail($post->ID, 'full'); 
+					}else if($sFirstImage!=''){
+						echo '<img src=\''.$sFirstImage.'\'>';
 					}else{
 						echo '<img src=\''.IMAGES.'/pick1.jpg'.'\'>';
-					}	
+					}
 				?>
 				<div class="hover-area">
 					<div class="count"><?php echo $nbImg ?></div>
@@ -233,14 +254,17 @@ function latest_post(){
 	foreach ($result as $key) {
 		switch_to_blog($key->blog_id);
 		$post = get_post($key->ID);
-		$attachments = get_children(array('post_parent'=>$post->ID));
-		$nbImg = count($attachments);
+		preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
+		$nbImg=count($result[0]);
 		?>
 		<div class="thumbnail-image-pick">
 			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
 				<?php 
+					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
 						echo get_the_post_thumbnail($post->ID, 'full'); 
+					}else if($sFirstImage!=''){
+						echo '<img src=\''.$sFirstImage.'\'>';
 					}else{
 						echo '<img src=\''.IMAGES.'/pick1.jpg'.'\'>';
 					}	
@@ -270,14 +294,17 @@ function featured_post($post_id,$blog_id){
 	if($post_id){
     	$post = get_post($post_id);
 	}
-	$attachments = get_children(array('post_parent'=>$post->ID));
-	$nbImg = count($attachments);
+	preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
+	$nbImg=count($result[0]);
 	?>
 	<div class="featured">
 		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
 			<?php 
+				$sFirstImage = catch_first_post_image($post);
 				if ( has_post_thumbnail($post->ID)) {
 					echo get_the_post_thumbnail($post->ID, 'full'); 
+				}else if($sFirstImage!=''){
+					echo '<img src=\''.$sFirstImage.'\'>';
 				}else{
 					echo '<img src=\''.IMAGES.'/byus.jpg'.'\'>';
 				}	
@@ -323,15 +350,18 @@ function selected_site($blog_id){
 			$lenght=count($posts);
 			foreach($posts as $post){
 		    setup_postdata( $post );
-		    $attachments = get_children(array('post_parent'=>$post->ID));
-			$nbImg = count($attachments);
+			preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
+			$nbImg=count($result[0]);
 		?>
 			<?php if($i==1 || $i==2) { ?><div class="col"><?php } ?>
 			<?php if($i==1) { ?><div class="thumbnail-image-large"> <?php } if($i>1) { ?><div class="thumbnail-image-small"><?php } ?>
 					<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php the_title();?>">
 						<?php 
+							$sFirstImage = catch_first_post_image($post);
 							if ( has_post_thumbnail($post->ID)) {
 								echo get_the_post_thumbnail($post->ID, 'full'); 
+							}else if($sFirstImage!=''){
+								echo '<img src=\''.$sFirstImage.'\'>';
 							}else{
 								echo '<img src=\''.IMAGES.'/blog1.jpg'.'\'>';
 							}	

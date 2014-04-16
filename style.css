@@ -411,6 +411,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	.latest .col .thumbnail-image-large{
 		width: 383px;
 		height: 275px;
+		border-radius: 4px;
 		position: relative;
 		overflow:hidden
 	}
@@ -479,10 +480,10 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	}
 	.latest .col .thumbnail-image-large img{
 		width: 383px;
-		height: 275px;
-		max-height: 275px;
+		height: auto;
 		display: block;
 		border-radius: 4px;
+		overflow: hidden;
 	}
 	.latest .col .thumbnail-image-small{
 		width: 198px;
@@ -490,6 +491,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		float: left;
 		position: relative;
 		overflow: hidden;
+		border-radius: 4px;
 	}
 
 	.latest .col .thumbnail-image-small .hover-area{
@@ -556,10 +558,10 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	}
 	.latest .col .thumbnail-image-small img{
 		width: 198px;
-		height: 128px;
-		max-height: 128px;
+		height: auto;
 		display: block;
 		border-radius: 4px;
+		overflow: hidden;
 	}
 	.latest .col .thumbnail-image-small:nth-child(1){
 		margin-right: 18px;
@@ -597,18 +599,20 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		height: 334px;
 		display: block;
 		margin: 43px auto;
+		overflow: hidden;
 	}
 	.featured img{
 		margin: 0 auto;
 		width: 504px;
-		height: 334px;
+		height: auto;
+		display: block;
 	}
 	.featured .hover-area{
 		width: 504px;
 		height: 334px;
 		position: absolute;
 		top:43px;
-		left: 154px;
+		left: 155px;
 		background: rgba(247, 245, 245, 0.8);
 		-webkit-transition: opacity 1000ms ease-out;
 	    -moz-transition: opacity  1000ms ease-out;
@@ -676,13 +680,15 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		float: left;
 		margin-right: 31px;
 		position: relative;
+		border-radius: 4px;
+		overflow: hidden;
 	}
 	.pick .thumbnail-image-pick img{
 		width: 180px;
-		height: 136px;
-		max-height: 180px;
+		height: auto;
 		display: block;
 		border-radius: 4px;
+		overflow: hidden;
 	}
 	.pick .thumbnail-image-pick .hover-area{
 		width: 180px;
@@ -1242,6 +1248,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-weight: 400;
 		margin-top: 10px;
 		color: rgba(0,0,0,0.7);
+		text-transform: uppercase;
 	}
 	@font-face {
 	font-family: 'icomoon';

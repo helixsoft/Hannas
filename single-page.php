@@ -4,7 +4,7 @@
 <div class="thumbnail-area">
 	<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
 		<?php
-			$sFirstImage = catch_first_post_image();
+			$sFirstImage = catch_first_post_image($post);
 			if ( has_post_thumbnail()) {
 				echo get_the_post_thumbnail($post->ID, 'full'); 
 			}else if($sFirstImage!=''){
@@ -19,6 +19,6 @@
 	<?php the_content();?>
 </div>
 <div class="blog-info">
-	<span>DATE</span> <?php echo get_the_date('Y-m-d') ?>  | <span>CATEGORY</span> <?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'Hannas' ) ); ?> | <span>TAGS</span> <?php the_tags('',',','') ?> | <span>SHARES</span>
+	<span>DATE</span> <?php echo get_the_date('Y-m-d') ?>  | <span>CATEGORY</span> <?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'Hannas' ) ); ?> | <?php if(has_tag()) { ?><span>TAGS</span> <?php the_tags('',',','') ?> | <?php } ?> <span>SHARES</span>
 </div>
 </article>

@@ -8,7 +8,7 @@ get_header();?>
 			<div class="blog_logo" align="center">
 				<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 					<?php if(ot_get_option( 'blog_logo')) { ?>
-						<a href="<?php echo site_url()?>" ><img src="ot_get_option( 'blog_logo')" title="<?php bloginfo('name'); ?>"></a>
+						<a href="<?php echo site_url()?>" ><img src="<?php echo ot_get_option( 'blog_logo') ?>" title="<?php bloginfo('name'); ?>"></a>
 					<?php } else { ?>
 						<a href="<?php echo site_url()?>" ><img src="<?php echo IMAGES?>/bloglogo.png" ></a>
 					<?php } ?>
@@ -17,6 +17,7 @@ get_header();?>
 			<?php
 				get_template_part( 'blog-nav');
 			?>
+			<div id="container">
 			<?php
 				if ( have_posts() ) :
 					// Start the Loop.
@@ -28,4 +29,6 @@ get_header();?>
 					get_template_part( 'content', 'none' );
 				endif;
 			?>
+			</div>
+			<?php hannas_paging_nav(); ?>
 <?php get_footer();?>

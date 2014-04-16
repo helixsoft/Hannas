@@ -9,7 +9,7 @@ get_header(); ?>
 			<div class="blog_logo" align="center">
 				<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 					<?php if(ot_get_option( 'blog_logo')) { ?>
-						<a href="<?php echo site_url()?>" ><img src="ot_get_option( 'blog_logo')" title="<?php bloginfo('name'); ?>"></a>
+						<a href="<?php echo site_url()?>" ><img src="<?php echo ot_get_option( 'blog_logo') ?>" title="<?php bloginfo('name'); ?>"></a>
 					<?php } else { ?>
 						<a href="<?php echo site_url()?>" ><img src="<?php echo IMAGES?>/bloglogo.png" ></a>
 					<?php } ?>
@@ -36,13 +36,13 @@ get_header(); ?>
 				<?php /* The loop */ ?>
 				<?php 
 					while ( have_posts() ) : the_post(); 
-					$attachments = get_children(array('post_parent'=>$post->ID));
-					$nbImg = count($attachments);
+					preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
+					$nbImg=count($result[0]);
 				?>
 				  	<div class="item" id="<?php echo $post->ID ?>">
 				  		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
 				  			<?php
-								$sFirstImage = catch_first_post_image();
+								$sFirstImage = catch_first_post_image($post);
 								if ( has_post_thumbnail()) {
 									echo get_the_post_thumbnail($post->ID, 'full'); 
 								}else if($sFirstImage!=''){

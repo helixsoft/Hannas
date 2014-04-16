@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<header>
-			<div class="logo"><a href=""><img src="<?php echo IMAGES?>/hannasroom_logo.png"></a></div>
+			<div class="logo"><a href="<?php echo get_site_url(1) ?>"><img src="<?php echo IMAGES?>/hannasroom_logo.png"></a></div>
 			<nav>
 				<li>
 					<a href="#">BLOGS</a>

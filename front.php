@@ -3,14 +3,6 @@
 Template Name: Front Page
 */
 get_header(); ?>
-<?php if( is_multisite() ): ?>
-
-   The <?php echo esc_html( get_site_option( 'site_name' ) ); ?> network currently powers <?php echo get_blog_count(); ?> websites and <?php echo get_user_count(); ?> users.
-	<?php
-		
-	?>    
-
-<?php endif; ?>
 		<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 			<?php if(ot_get_option( 'first_on_off')=='on') { ?>
 				<?php selected_site(ot_get_option('first_select')); ?>
