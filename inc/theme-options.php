@@ -127,9 +127,24 @@ function custom_theme_options() {
             'condition'   => '',
             'operator'    => 'and'
           ),
+        array(
+        'id'          => 'author_pic',
+        'label'       => __( 'Author Pic', 'Hannas' ),
+        'desc'        => __('Put 243x194 size image for author','Hannas'),
+        'std'         => '',
+        'type'        => 'upload',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
+      ),
          array(
         'id'          => 'first_on_off',
-        'label'       => __( 'On/Off', 'Hannas' ),
+        'label'       => __( 'Blog Latest On/Off', 'Hannas' ),
         'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/hannas1.jpg'>") ),
         'std'         => '',
         'type'        => 'on-off',
@@ -160,7 +175,7 @@ function custom_theme_options() {
       ),
          array(
         'id'          => 'featured_on_off',
-        'label'       => __( 'On/Off', 'Hannas' ),
+        'label'       => __( 'Featured On/Off', 'Hannas' ),
         'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/hannas2.jpg'>") ),
         'std'         => '',
         'type'        => 'on-off',
@@ -206,7 +221,7 @@ function custom_theme_options() {
       ),
         array(
         'id'          => 'pick_on_off',
-        'label'       => __( 'On/Off', 'Hannas' ),
+        'label'       => __( 'Latest or Category On/Off', 'Hannas' ),
         'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/hannas2.jpg'>") ),
         'std'         => '',
         'type'        => 'on-off',
@@ -264,7 +279,7 @@ function custom_theme_options() {
       ),
         array(
         'id'          => 'video_on_off',
-        'label'       => __( 'On/Off', 'Hannas' ),
+        'label'       => __( 'Video On/Off', 'Hannas' ),
         'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/hannas5.jpg'>") ),
         'std'         => '',
         'type'        => 'on-off',
@@ -294,7 +309,7 @@ function custom_theme_options() {
       ),
         array(
         'id'          => 'contributors_on_off',
-        'label'       => __( 'On/Off', 'Hannas' ),
+        'label'       => __( 'Contributors On/Off', 'Hannas' ),
         'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/hannas4.jpg'>") ),
         'std'         => '',
         'type'        => 'on-off',
@@ -306,6 +321,22 @@ function custom_theme_options() {
         'class'       => '',
         'condition'   => '',
         'operator'    => 'and'
+      ),
+         array(
+        'id'          => 'contributors_site_checkbox',
+        'label'       => __( 'Select Site in Checkbox', 'Hannas' ),
+        'desc'        => __( 'Select Multiple Site in Checkbox', 'Hannas' ),
+        'std'         => '',
+        'type'        => 'checkbox',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and',
+        'choices'     => theme_option_list_blog(),
       ),
     )
   );

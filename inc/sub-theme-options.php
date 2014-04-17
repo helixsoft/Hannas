@@ -127,6 +127,21 @@ function custom_theme_options() {
         'condition'   => '',
         'operator'    => 'and'
       ),
+       array(
+        'id'          => 'author_pic',
+        'label'       => __( 'Author Pic', 'Hannas' ),
+        'desc'        => __('Put 243x194 size image for author','Hannas'),
+        'std'         => '',
+        'type'        => 'upload',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
+      ),
     )
   );
   

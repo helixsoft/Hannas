@@ -24,6 +24,8 @@ get_header(); ?>
 				while ( have_posts() ) : the_post();
 					get_template_part( 'single-page', get_post_format() );
 					comments_template();
+					get_template_part( 'latest');
 				endwhile;
 			?>
+
 <?php get_footer(); ?>

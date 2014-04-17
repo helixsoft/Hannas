@@ -20,6 +20,14 @@ function Hannas_setup() {
 	 * This theme supports all available post formats by default.
 	 * See http://codex.wordpress.org/Post_Formats
 	 */
+	// Adds RSS feed links to <head> for posts and comments.
+	add_theme_support( 'automatic-feed-links' );
+	// This theme uses wp_nav_menu() in one location.
+	if( is_multisite() ){
+		if(is_main_site( get_current_blog_id() )){
+			register_nav_menu( 'primary', __( 'Navigation Menu', 'Hannas' ) );
+		}
+	}
 	add_theme_support( 'post-thumbnails' );
 }
 
@@ -46,7 +54,7 @@ function Hannas_assets() {
 
 add_action( 'wp_enqueue_scripts', 'Hannas_assets' );
 
-if ( ! function_exists( 'twentythirteen_paging_nav' ) ) :
+if ( ! function_exists( 'Hannas_paging_nav' ) ) :
 /**
  * Display navigation to next/previous set of posts when applicable.
  *
@@ -73,6 +81,31 @@ function Hannas_paging_nav() {
 }
 endif;
 
+if ( ! function_exists( 'Hannas_post_nav' ) ) :
+/**
+ * Displays navigation to next/previous post when applicable.
+*/
+function Hannas_post_nav() {
+	global $post;
+
+	// Don't print empty markup if there's nowhere to navigate.
+	$previous = ( is_attachment() ) ? get_post( $post->post_parent ) : get_adjacent_post( false, '', true );
+	$next     = get_adjacent_post( false, '', false );
+
+	if ( ! $next && ! $previous )
+		return;
+	?>
+	<div class="nav-links">
+        <div class="nav-previous">
+          	<?php previous_post_link( '%link', _x('Previous Post','test1','VoyageTravel' ) ); ?>
+        </div>
+        <div class="nav-next">
+           	<?php next_post_link( '%link', _x( 'Next Post','test2','VoyageTravel' ) ); ?>
+        </div>
+     </div>
+	<?php
+}
+endif;
 /**
  * Loads a set of CSS and/or Javascript documents. 
  */
@@ -279,6 +312,7 @@ function latest_post(){
 			</a>
 		</div>
 		<?php
+		wp_reset_postdata();
 		switch_to_blog( $original_blog_id );
 	}
 	?>
@@ -342,7 +376,7 @@ function selected_site($blog_id){
 		'post_parent'      => '',
 		'post_status'      => 'publish',
 		'suppress_filters' => true );
-    $posts = get_posts($arg);
+    $posts = query_posts($args);
     ?>
 	<div class="latest">
 		<?php 
@@ -383,3 +417,155 @@ function selected_site($blog_id){
 	<?php
 		switch_to_blog( $original_blog_id ); //switched back to current blog
 }
+function select_contributer($list){
+?>
+<div class="contributors-box clearfix">
+<?php
+	$original_blog_id = get_current_blog_id();
+	foreach ($list as $key) {
+		switch_to_blog($key);
+		$args = array(
+		'posts_per_page'   => 1,
+		'offset'           => 0,
+		'category'         => '',
+		'orderby'          => 'post_date',
+		'order'            => 'DESC',
+		'include'          => '',
+		'exclude'          => '',
+		'meta_key'         => '',
+		'meta_value'       => '',
+		'post_type'        => 'post',
+		'post_mime_type'   => '',
+		'post_parent'      => '',
+		'post_status'      => 'publish',
+		'suppress_filters' => true );
+    $posts = query_posts($args);
+    foreach($posts as $post){
+    	setup_postdata( $post );
+    	preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
+		$nbImg=count($result[0]);
+?>
+
+	<div class="thumbnail-image-cont">
+		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php the_title();?>">
+			<?php if ( function_exists( 'ot_get_option' ) ) { ?>
+				<?php if(ot_get_option( 'author_pic')) { ?>
+					<img src="<?php echo ot_get_option( 'author_pic')?>">
+				<?php } else { ?>
+					<img src="<?php echo IMAGES?>/con1.jpg">
+				<?php } ?>
+			<?php } ?>
+			<div class="hover-area">
+				<div class="count"><?php echo $nbImg ?></div>
+				<div class="text-area">
+					<div class="title"><?php echo $post->post_title;?></div>
+					<div class="author"><?php echo get_userdata($post->post_author)->display_name;?></div>
+				</div>
+			</div>
+		</a>
+	</div>
+	<?php } ?>
+<?php
+}
+switch_to_blog( $original_blog_id ); //switched back to current blog
+?>
+</div>
+<?php
+}
+
+function clean_custom_menus() {
+	$original_blog_id = get_current_blog_id();
+	switch_to_blog(1);
+	$menu_name = 'primary'; // specify custom menu slug
+	$locations = get_nav_menu_locations();
+	$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+	$menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
+	?>
+	<nav>
+    <?php
+    $count = 0;
+    $submenu = false;
+    foreach( $menuitems as $item ):
+        // get page id from using menu item object id
+        $id = get_post_meta( $item->ID, '_menu_item_object_id', true );
+        // set up a page object to retrieve page data
+        $page = get_page( $id );
+        $link = get_page_link( $id );
+
+        // item does not have a parent so menu_item_parent equals 0 (false)
+        if ( !$item->menu_item_parent ):
+
+        // save this id for later comparison with sub-menu items
+        $parent_id = $item->ID;
+    ?>
+    	<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
+    <?php endif; ?>
+    <?php if ( $parent_id == $item->menu_item_parent ): ?>
+    <?php if ( !$submenu ): $submenu = true; $k=0;$i=0;?>
+            <ul class="sub-menu"><div class="sub-menu-text">our blogs</div>
+    <?php endif; ?>
+    		<?php if($i%4==0 && $k==1) { ?></div> <?php } ?>
+    		<?php if($i%4==0 && $i >= 0) { ?> <div class="col"> <?php $k=1; } ?>
+     		<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a></li>
+     		<?php $i++;?>
+    <?php if ( $menuitems[ $count + 1 ]->menu_item_parent != $parent_id && $submenu ): ?>
+            <?php if($i%4!=0) { ?> </div> <?php } ?></ul>
+    <?php $submenu = false; endif; ?>
+    <?php endif; ?>
+    <?php if ( $menuitems[ $count + 1 ]->menu_item_parent != $parent_id ): ?>
+    	</li>                           
+    <?php $submenu = false; endif; ?>
+	<?php $count++; endforeach; ?>
+	</nav>
+	<?php
+	switch_to_blog( $original_blog_id );
+}
+
+function clean_custom_resposive_menus() {
+	$original_blog_id = get_current_blog_id();
+	switch_to_blog(1);
+	$menu_name = 'primary'; // specify custom menu slug
+	$locations = get_nav_menu_locations();
+	$menu = wp_get_nav_menu_object( $locations[ $menu_name ] );
+	$menuitems = wp_get_nav_menu_items( $menu->term_id, array( 'order' => 'DESC' ) );
+	?>
+	<div id="dl-menu" class="dl-menuwrapper">
+		<button class="dl-trigger">Open Menu</button>
+		<ul class="dl-menu">
+    <?php
+    $count = 0;
+    $submenu = false;
+    foreach( $menuitems as $item ):
+        // get page id from using menu item object id
+        $id = get_post_meta( $item->ID, '_menu_item_object_id', true );
+        // set up a page object to retrieve page data
+        $page = get_page( $id );
+        $link = get_page_link( $id );
+
+        // item does not have a parent so menu_item_parent equals 0 (false)
+        if ( !$item->menu_item_parent ):
+
+        // save this id for later comparison with sub-menu items
+        $parent_id = $item->ID;
+    ?>
+    	<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
+    <?php endif; ?>
+    <?php if ( $parent_id == $item->menu_item_parent ): ?>
+    <?php if ( !$submenu ): $submenu = true; ?>
+            <ul class="dl-submenu">
+    <?php endif; ?>
+     		<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a></li>
+    <?php if ( $menuitems[ $count + 1 ]->menu_item_parent != $parent_id && $submenu ): ?>
+            </ul>
+    <?php $submenu = false; endif; ?>
+    <?php endif; ?>
+    <?php if ( $menuitems[ $count + 1 ]->menu_item_parent != $parent_id ): ?>
+    	</li>                           
+    <?php $submenu = false; endif; ?>
+	<?php $count++; endforeach; ?>
+		</ul>
+	</div>
+	<?php
+	switch_to_blog( $original_blog_id );
+}
+
