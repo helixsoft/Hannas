@@ -14,6 +14,7 @@
 		$('.toggle-comment span').html('');
 		$('.comment-area').show();
 	}
+	$(".featuredVideo").fitVids();
 	$('#container').masonry({
 	  // options
 	  columnWidth: jQuery(document).width() > 800 ? 265 : jQuery(document).width() >= 600 ? 275 : 145 ,

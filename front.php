@@ -20,22 +20,24 @@ get_header(); ?>
 				<?php 
 					if(ot_get_option( 'pick_type' ,'no')=='no') {
 						if(ot_get_option('pick_category_select')) {
-							list_post(ot_get_option('pick_category_select'));
+							list_post(ot_get_option('pick_category_select'),ot_get_option( 'pick_site_checkbox'));
 						}
 					}
 					if(ot_get_option( 'pick_type' ,'yes')=='yes'){
-						latest_post();
+						latest_post(ot_get_option( 'pick_site_checkbox'));
 					}
 				?>	
 			<?php } ?>
 		<?php } ?>
 		<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 			<?php if(ot_get_option( 'video_on_off','on')=='on') { ?>
-				<div class="featured">
+				<div class="featuredVideo">
+					<div class="vendor">
 					<?php if(ot_get_option('video')){
 						echo ot_get_option('video');
 					}
 					?>
+					</div>
 				</div>
 			<?php } ?>
 		<?php } ?>

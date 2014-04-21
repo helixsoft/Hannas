@@ -4,7 +4,7 @@ Theme URI: http://helixsoft.in
 Author: Tushar Dhara
 Author URI: http://helixsoft.in
 Description: The Theme for Hannas developed by Tushar.
-Version: 0.0.0.2
+Version: 0.0.0.3
 License: GNU General Public License v2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: black, brown, orange, tan, white, yellow, light, one-column, two-columns, right-sidebar, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
@@ -469,6 +469,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-style: normal;
 		text-transform: uppercase;
 		margin-top: 0px;
+		padding: 0 10px;
 	}
 	
 	.latest .col .thumbnail-image-large .hover-area .text-area .author{
@@ -485,6 +486,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		display: block;
 		border-radius: 4px;
 		overflow: hidden;
+		min-height: 275px;
 	}
 	.latest .col .thumbnail-image-small{
 		width: 198px;
@@ -547,6 +549,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-style: normal;
 		margin-top: 0px;
 		text-transform: uppercase;
+		padding: 0 10px;
 	}
 	
 	.latest .col .thumbnail-image-small .hover-area .text-area .author{
@@ -563,6 +566,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		display: block;
 		border-radius: 4px;
 		overflow: hidden;
+		min-height: 128px;
 	}
 	.latest .col .thumbnail-image-small:nth-child(1){
 		margin-right: 18px;
@@ -586,14 +590,14 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		border:1px solid #000;
 		position: relative;
 	}
-	.featured iframe{
+	.featuredVideo{
+		height: auto;
+		width: 813px;
+		border:1px solid #000;
 		position: relative;
-		top:50%;
-		left: 50%;
-		max-width: 500px;
-		-webkit-transform:translate(-50%, -50%);
-		-moz-transform:translate(-50%, -50%);
-		transform:translate(-50%, -50%);
+	}
+	.featuredVideo .vendor{
+		padding: 5.28% 19.24%;
 	}
 	.featured a{
 		width: 504px;
@@ -659,6 +663,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-style: normal;
 		margin-top: 0px;
 		text-transform: uppercase;
+		padding: 0 10px;
 	}
 	
 	.featured .hover-area .text-area .author{
@@ -690,6 +695,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		display: block;
 		border-radius: 4px;
 		overflow: hidden;
+		min-height: 136px;
 	}
 	.pick .thumbnail-image-pick .hover-area{
 		width: 180px;
@@ -742,6 +748,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-style: normal;
 		text-transform: uppercase;
 		margin-top: 0px;
+		padding: 0 10px;
 	}
 	
 	.pick .thumbnail-image-pick .hover-area .text-area .author{
@@ -760,28 +767,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	}
 	.pick .thumbnail-image-pick:nth-child(n+4){
 		margin-bottom: 0px;
-	}
-	.featured_video{
-		height: 420px;
-		width: 847px;
-		border:1px solid #000;
-	}
-	.featured_video iframe{
-		margin: 43px auto;
-		width: 504px;
-		height: 334px;
-		display: block;
-	}
-	.featured_video a{
-		width: 573px;
-		height: 332px;
-		display: block;
-		margin: 44px auto;
-	}
-	.featured_video img{
-		margin: 0 auto;
-		width: 573px;
-		height: 332px;
 	}
 	.contributors{
 		width: 100%;
@@ -871,6 +856,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-style: normal;
 		text-transform: uppercase;
 		font-family: 'Lato', sans-serif;
+		padding: 0 10px;
 	}
 	.contributors-box .thumbnail-image-cont .hover-area .text-area .author{
 		font-size: 14px;
@@ -900,18 +886,20 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	footer .left{
 		float: left;
 		font-size: 12px;
-		font-weight: 900;
+		font-weight: 500;
 	}
 	footer .right{
 		float: right;
 		font-size: 12px;
-		font-weight: 900;
+		font-weight: 500;
 	}
 
 	.blog_logo{
 		margin-top: 32px;
 	}
-	
+	.blog_logo img{
+		max-width: 100%;
+	}
 	nav.blog_nav{
 		width: 555px;
 		height: 13px;
@@ -923,17 +911,20 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		padding-bottom: 12px;
 	}
 	nav.blog_nav ul{
-		width: 414px;
 		height: 13px;
 		margin: 0 auto;
+		width: auto;
+		display: table;
 	}
 	nav.blog_nav li{
-		float: left;
 		padding: 0 10px;
 		border:none;
 		line-height: 11px;
 		margin-bottom: 2px;
 		position: relative;
+		 display: table-cell;
+  width: auto;
+  text-align: center;
 	}
 	nav.blog_nav li a{
 		text-transform: uppercase;
@@ -948,14 +939,18 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		border: none;
 		padding-right: 0px;
 	}
-	nav.blog_nav li a span{
+	nav.blog_nav li a span:nth-of-type(1){
+		text-transform: lowercase;
+		margin-right: 5px;
+	}
+	nav.blog_nav li a span.arrow{
 		width: 7px;
 		height: 7px;
 		display: inline-block;
 		background: url(images/menu-arrow.png) 0px 0px no-repeat;
 		margin-left: 5px;
 	}
-	nav.blog_nav li:hover a span{
+	nav.blog_nav li:hover a span.arrow{
 		background: url(images/menu-arrow.png) -7px 0px no-repeat;
 	}
 	nav.blog_nav li ul.sub-menu{
@@ -1022,20 +1017,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		margin: 0 -160px 20px;
 		display: block;
 	}
-	.my-content p:first-of-type a img {
-		display: block;
-		width: 815px;
-		height: auto;
-		max-width: 100%;
-		position: relative;
-		margin: 0 auto;
-	}
 	.my-content p a img{
 		display: block;
 		max-width: 100%;
 		position: relative;
 		margin: 0 auto;
-		width: 600px;
 		height: auto;
 	}
 	.blog-info{
@@ -1203,7 +1189,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		margin-top: 30px;
 	}
 	.item { width: 265px; margin-bottom: 10px;}
-	.item img{ width: 265px; }
+	.item img{ width: 265px; height: auto;}
 	.extra{
 		margin-bottom: 100px;
 	}
@@ -1256,6 +1242,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		color: rgba(0,0,0,0.7);
 		font-family: 'Lato', sans-serif;
 		font-style: normal;
+		padding: 0 10px;
 	}
 	
 	.item .hover-area .text-area .author{
@@ -2304,6 +2291,16 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	.demo-5 .dl-menuwrapper ul {
 		background: #643771;
 	}
+	video {
+            max-width: 100%;
+            height: auto;
+          }
+
+          iframe,
+          embed,
+          object {
+            max-width: 100%;
+          }
 	@media only screen and (min-width: 801px){
 		.dl-menuwrapper{
 			display: none;
@@ -2408,6 +2405,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			height: 264px;
 			width: 560px;
 		}
+		.featuredVideo{
+			width: 560px;
+		}
 		.featured a{
 			width: 464px;
 			height: 244px;
@@ -2440,6 +2440,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			font-style: normal;
 			margin-top: 0px;
 			text-transform: uppercase;
+			padding: 0 10px;
 		}
 		
 		.featured .hover-area .text-area .author{
@@ -2624,6 +2625,9 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			height: 141px;
 			width: 300px;
 		}
+		.featuredVideo{
+			width: 300px;
+		}
 		.featured a{
 			width: 200px;
 			height: 105px;
@@ -2655,6 +2659,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			font-style: normal;
 			margin-top: 0px;
 			text-transform: uppercase;
+			padding: 0 10px;
 		}
 		
 		.featured .hover-area .text-area .author{

@@ -222,7 +222,7 @@ function custom_theme_options() {
         array(
         'id'          => 'pick_on_off',
         'label'       => __( 'Latest or Category On/Off', 'Hannas' ),
-        'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/hannas2.jpg'>") ),
+        'desc'        => sprintf( __("<img src='http://helixsoft.in/hannas/wp-content/themes/Hannas/images/hannas3.jpg'>") ),
         'std'         => '',
         'type'        => 'on-off',
         'section'     => 'theme_settings',
@@ -260,6 +260,22 @@ function custom_theme_options() {
             'src'         => ''
           ),
         )
+      ),
+        array(
+        'id'          => 'pick_site_checkbox',
+        'label'       => __( 'Select Site in Checkbox', 'Hannas' ),
+        'desc'        => __( 'Select Multiple Site in Checkbox', 'Hannas' ),
+        'std'         => '',
+        'type'        => 'checkbox',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and',
+        'choices'     => theme_option_list_blog(),
       ),
         array(
         'id'          => 'pick_category_select',

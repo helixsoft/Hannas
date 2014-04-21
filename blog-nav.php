@@ -2,16 +2,16 @@
 				<ul>
 					<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 						<?php if(ot_get_option( 'page_select')) { ?>
-							<?php if(ot_get_option( 'page_text')) { ?>
-								<li><a href="<?php echo get_permalink(ot_get_option( 'page_select'));?>"><?php echo ot_get_option( 'page_name');?></a></li>
+							<?php if(ot_get_option( 'page_name')) { ?>
+								<li><a href="<?php echo get_permalink(ot_get_option( 'page_select'));?>"><span>about</span><span><?php echo ot_get_option( 'page_name');?></span></a></li>
 							<?php } else { ?>
-								<li><a href="<?php echo get_permalink(ot_get_option( 'page_select'));?>">about HANNA</a></li>
+								<li><a href="<?php echo get_permalink(ot_get_option( 'page_select'));?>"><span>about</span><span>HANNA</span></a></li>
 							<?php } ?>
 						<?php } else { ?>
-							<?php if(ot_get_option( 'page_text')) { ?>
-								<li><a href="#"><?php echo ot_get_option( 'page_name');?></a></li>
+							<?php if(ot_get_option( 'page_name')) { ?>
+								<li><a href="#"><span>about</span><span><?php echo ot_get_option( 'page_name');?></span></a></li>
 							<?php } else { ?>
-								<li><a href="#">about HANNA</a></li>
+								<li><a href="#"><span>about</span><span>HANNA</span></a></li>
 							<?php } ?>
 						<?php } ?>
 					<?php } ?>

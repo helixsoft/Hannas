@@ -29,9 +29,24 @@ function Hannas_setup() {
 		}
 	}
 	add_theme_support( 'post-thumbnails' );
+	add_image_size( 'thumbnail-image-large', 383);
 }
 
 add_action( 'after_setup_theme', 'Hannas_setup' );
+
+if ( function_exists( 'add_image_size' ) ) {
+	add_image_size( 'new-mid-size', 660); //(cropped)
+	add_image_size( 'new-small-size', 490); //(cropped)
+}
+add_filter('image_size_names_choose', 'my_image_sizes');
+function my_image_sizes($sizes) {
+	$addsizes = array(
+		"new-mid-size" => __( "Width 660"),
+		"new-small-size" => __( "Width 490" ),
+	);
+	$newsizes = array_merge($sizes, $addsizes);
+	return $newsizes;
+}
 
 /**
 * Enqueue Scripts and Styles for Front-End
@@ -39,13 +54,14 @@ add_action( 'after_setup_theme', 'Hannas_setup' );
 function Hannas_assets() {
 		wp_enqueue_script('jquery');
 		wp_enqueue_style( 'styles', get_template_directory_uri().'/style.css',false,'0.0.0.1', 'all' );
-		// Load JavaScripts
+		// Load JavaScripts jquery.fitvids
 		wp_enqueue_script( 'modernizr', get_template_directory_uri().'/js/modernizr.js',false, '2.6.2',true);
 		wp_enqueue_script('smoothScroll',get_template_directory_uri().'/js/SmoothScroll.js',false,'0.9.9',true);
 		wp_enqueue_script( 'device', get_template_directory_uri() . '/js/device.min.js', false,'0.1.57', true);
 		wp_enqueue_script( 'dlmenu', get_template_directory_uri() . '/js/jquery.dlmenu.js', false,'1.0.1', true);
 		wp_enqueue_script('masonry',get_template_directory_uri() . '/js/masonry.pkgd.min.js',array('jquery'),null,true);
 		wp_enqueue_script('infinite',get_template_directory_uri() . '/js/jquery.infinitescroll.min.js',array('jquery'),null,true);
+		wp_enqueue_script('fitvids',get_template_directory_uri() . '/js/jquery.fitvids.js',array('jquery'),'1.1',true);
 		wp_enqueue_script('main',get_template_directory_uri() . '/js/main.js',array('jquery'),null,true);
 		// Load Google Fonts API
 		wp_enqueue_style( 'google-fonts-roboto', 'http://fonts.googleapis.com/css?family=Roboto:900' ,false,null,false);
@@ -213,18 +229,32 @@ function list_category(){
 	}
 	return $arg;
 }
-function list_post($name){
+function list_post($name,$list){
 	global $wpdb;
 	$original_blog_id = get_current_blog_id();
 	$query = "SELECT * FROM ( ";
-	for ($i=1; $i <= get_blog_count(); $i++) { 
-	 	if($i==1){
-	 		$query.="SELECT a.ID AS ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}posts a , {$wpdb->prefix}term_relationships b , {$wpdb->prefix}terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}') UNION ALL ";
-	 	}else if($i>1 && $i<get_blog_count() ){
-	 		$query.="SELECT a.ID AS ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts a , {$wpdb->prefix}{$i}_term_relationships b , {$wpdb->prefix}{$i}_terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}') UNION ALL ";
-	 	}else{
-	 		$query.="SELECT a.ID AS ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts a , {$wpdb->prefix}{$i}_term_relationships b , {$wpdb->prefix}{$i}_terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}')";
-	 	}
+	$i=1;
+	if(!empty($list)){
+		foreach ($list as $key) { 
+			if($key==1){
+		 		$query.="SELECT a.ID AS ID , '{$key}' AS blog_id , post_date FROM {$wpdb->prefix}posts a , {$wpdb->prefix}term_relationships b , {$wpdb->prefix}terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}') UNION ALL ";
+		 	}else if($key>1 && $i<count($list)){
+		 		$query.="SELECT a.ID AS ID , '{$key}' AS blog_id , post_date FROM {$wpdb->prefix}{$key}_posts a , {$wpdb->prefix}{$key}_term_relationships b , {$wpdb->prefix}{$key}_terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}') UNION ALL ";
+		 	}else{
+		 		$query.="SELECT a.ID AS ID , '{$key}' AS blog_id , post_date FROM {$wpdb->prefix}{$key}_posts a , {$wpdb->prefix}{$key}_term_relationships b , {$wpdb->prefix}{$key}_terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}')";
+		 	}
+		 	$i++;
+		}
+	} else {
+		for ($i=1; $i <= get_blog_count(); $i++) { 
+		 	if($i==1){
+		 		$query.="SELECT a.ID AS ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}posts a , {$wpdb->prefix}term_relationships b , {$wpdb->prefix}terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}') UNION ALL ";
+		 	}else if($i>1 && $i<get_blog_count() ){
+		 		$query.="SELECT a.ID AS ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts a , {$wpdb->prefix}{$i}_term_relationships b , {$wpdb->prefix}{$i}_terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}') UNION ALL ";
+		 	}else{
+		 		$query.="SELECT a.ID AS ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts a , {$wpdb->prefix}{$i}_term_relationships b , {$wpdb->prefix}{$i}_terms c WHERE ( a.ID = b.object_id AND b.term_taxonomy_id = c.term_id AND c.name='{$name}')";
+		 	}
+		}
 	}
 	$query.=" ) new ORDER BY post_date DESC LIMIT 8";
 	$result = $wpdb->get_results($query); 
@@ -238,7 +268,7 @@ function list_post($name){
 		$nbImg=count($result[0]);
 		?>
 		<div class="thumbnail-image-pick">
-			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
+			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
@@ -266,18 +296,32 @@ function list_post($name){
 	<?php 
 }
 
-function latest_post(){
+function latest_post($list){
 	global $wpdb;
 	$original_blog_id = get_current_blog_id();
 	$query = "SELECT * FROM ( ";
-	for ($i=1; $i <= get_blog_count(); $i++) { 
-	 	if($i==1){
-	 		$query.="SELECT ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}posts WHERE post_status = 'publish' AND post_type = 'post' UNION ALL ";
-	 	}else if($i>1 && $i<get_blog_count() ){
-	 		$query.="SELECT ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts WHERE post_status = 'publish' AND post_type = 'post' UNION ALL  ";
-	 	}else{
-	 		$query.="SELECT ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts WHERE post_status = 'publish' AND post_type = 'post' ";
-	 	}
+	$i=1;
+	if(!empty($list)){
+		foreach ($list as $key) { 
+		 	if($key==1){
+		 		$query.="SELECT ID , '{$key}' AS blog_id , post_date FROM {$wpdb->prefix}posts WHERE post_status = 'publish' AND post_type = 'post' UNION ALL ";
+		 	}else if($key>1 && $i<count($list) ){
+		 		$query.="SELECT ID , '{$key}' AS blog_id , post_date FROM {$wpdb->prefix}{$key}_posts WHERE post_status = 'publish' AND post_type = 'post' UNION ALL  ";
+		 	}else{
+		 		$query.="SELECT ID , '{$key}' AS blog_id , post_date FROM {$wpdb->prefix}{$key}_posts WHERE post_status = 'publish' AND post_type = 'post' ";
+		 	}
+		 	$i++;
+		} 
+	} else {
+		for ($i=1; $i <= get_blog_count(); $i++) { 
+			if($i==1){
+		 		$query.="SELECT ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}posts WHERE post_status = 'publish' AND post_type = 'post' UNION ALL ";
+		 	}else if($i>1 && $i<get_blog_count() ){
+		 		$query.="SELECT ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts WHERE post_status = 'publish' AND post_type = 'post' UNION ALL  ";
+		 	}else{
+		 		$query.="SELECT ID , '{$i}' AS blog_id , post_date FROM {$wpdb->prefix}{$i}_posts WHERE post_status = 'publish' AND post_type = 'post' ";
+		 	}
+		 }
 	}
 	$query.=" ) new ORDER BY post_date DESC LIMIT 8";
 	$result = $wpdb->get_results($query); 
@@ -291,7 +335,7 @@ function latest_post(){
 		$nbImg=count($result[0]);
 		?>
 		<div class="thumbnail-image-pick">
-			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
+			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
@@ -332,7 +376,7 @@ function featured_post($post_id,$blog_id){
 	$nbImg=count($result[0]);
 	?>
 	<div class="featured">
-		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $post->post_title;?>">
+		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
 			<?php 
 				$sFirstImage = catch_first_post_image($post);
 				if ( has_post_thumbnail($post->ID)) {
@@ -389,11 +433,11 @@ function selected_site($blog_id){
 		?>
 			<?php if($i==1 || $i==2) { ?><div class="col"><?php } ?>
 			<?php if($i==1) { ?><div class="thumbnail-image-large"> <?php } if($i>1) { ?><div class="thumbnail-image-small"><?php } ?>
-					<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php the_title();?>">
+					<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
 						<?php 
 							$sFirstImage = catch_first_post_image($post);
 							if ( has_post_thumbnail($post->ID)) {
-								echo get_the_post_thumbnail($post->ID, 'full'); 
+								echo get_the_post_thumbnail($post->ID, 'thumbnail-image-large'); 
 							}else if($sFirstImage!=''){
 								echo '<img src=\''.$sFirstImage.'\'>';
 							}else{
@@ -447,7 +491,7 @@ function select_contributer($list){
 ?>
 
 	<div class="thumbnail-image-cont">
-		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php the_title();?>">
+		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
 			<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 				<?php if(ot_get_option( 'author_pic')) { ?>
 					<img src="<?php echo ot_get_option( 'author_pic')?>">

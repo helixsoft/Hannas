@@ -5,6 +5,6 @@
 	<?php the_content();?>
 </div>
 <div class="blog-info">
-	<span>DATE</span> <?php echo get_the_date('Y-m-d') ?>  | <span>CATEGORY</span> <?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'Hannas' ) ); ?> | <?php if(has_tag()) { ?><span>TAGS</span> <?php the_tags('',',','') ?> | <?php } ?> <span>SHARES</span>
+	<span>DATE</span> <?php echo get_the_date('Y-m-d') ?>  | <span>CATEGORY</span> <?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'Hannas' ) ); ?> | <?php if(has_tag()) { ?><span>TAGS</span> <?php the_tags('',',','') ?> | <?php } ?> <span>SHARE</span>
 </div>
 </article>

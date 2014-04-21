@@ -1,5 +1,5 @@
 </div>
-	<div class="contributors clearfix">
+	<div class="contributors">
 		<div class="container down">
 			<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 				<?php if(ot_get_option( 'contributors_on_off','on')=='on') { ?>
