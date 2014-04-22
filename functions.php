@@ -29,7 +29,12 @@ function Hannas_setup() {
 		}
 	}
 	add_theme_support( 'post-thumbnails' );
-	add_image_size( 'thumbnail-image-large', 383);
+	add_image_size( 'thumbnail-image-large', 383,275,array( center, center ));
+	add_image_size( 'thumbnail-image-small', 198,128,array( center, center ));
+	add_image_size( 'thumbnail-featured', 504,334,array( center, center ));
+	add_image_size( 'thumbnail-image-pick', 180,136,array( center, center ));
+	add_image_size( 'thumbnail-image-cont',243,194,false);
+	add_image_size( 'thumbnail-image-item',265);
 }
 
 add_action( 'after_setup_theme', 'Hannas_setup' );
@@ -52,6 +57,7 @@ function my_image_sizes($sizes) {
 * Enqueue Scripts and Styles for Front-End
 */
 function Hannas_assets() {
+		wp_deregister_script('jquery-masonry');
 		wp_enqueue_script('jquery');
 		wp_enqueue_style( 'styles', get_template_directory_uri().'/style.css',false,'0.0.0.1', 'all' );
 		// Load JavaScripts jquery.fitvids
@@ -59,7 +65,8 @@ function Hannas_assets() {
 		wp_enqueue_script('smoothScroll',get_template_directory_uri().'/js/SmoothScroll.js',false,'0.9.9',true);
 		wp_enqueue_script( 'device', get_template_directory_uri() . '/js/device.min.js', false,'0.1.57', true);
 		wp_enqueue_script( 'dlmenu', get_template_directory_uri() . '/js/jquery.dlmenu.js', false,'1.0.1', true);
-		wp_enqueue_script('masonry',get_template_directory_uri() . '/js/masonry.pkgd.min.js',array('jquery'),null,true);
+		wp_enqueue_script('imagesLoaded', get_template_directory_uri().'/js/imagesloaded.pkgd.min.js', false, '3.1.5', true);
+		wp_enqueue_script('masonry',get_template_directory_uri() . '/js/masonry.pkgd.min.js',array( 'imagesLoaded'),'3.1.2',true);
 		wp_enqueue_script('infinite',get_template_directory_uri() . '/js/jquery.infinitescroll.min.js',array('jquery'),null,true);
 		wp_enqueue_script('fitvids',get_template_directory_uri() . '/js/jquery.fitvids.js',array('jquery'),'1.1',true);
 		wp_enqueue_script('main',get_template_directory_uri() . '/js/main.js',array('jquery'),null,true);
@@ -272,7 +279,7 @@ function list_post($name,$list){
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
-						echo get_the_post_thumbnail($post->ID, 'full'); 
+						echo get_the_post_thumbnail($post->ID, 'thumbnail-image-pick'); 
 					}else if($sFirstImage!=''){
 						echo '<img src=\''.$sFirstImage.'\'>';
 					}else{
@@ -339,7 +346,7 @@ function latest_post($list){
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
-						echo get_the_post_thumbnail($post->ID, 'full'); 
+						echo get_the_post_thumbnail($post->ID, 'thumbnail-image-pick'); 
 					}else if($sFirstImage!=''){
 						echo '<img src=\''.$sFirstImage.'\'>';
 					}else{
@@ -380,7 +387,7 @@ function featured_post($post_id,$blog_id){
 			<?php 
 				$sFirstImage = catch_first_post_image($post);
 				if ( has_post_thumbnail($post->ID)) {
-					echo get_the_post_thumbnail($post->ID, 'full'); 
+					echo get_the_post_thumbnail($post->ID, 'thumbnail-featured'); 
 				}else if($sFirstImage!=''){
 					echo '<img src=\''.$sFirstImage.'\'>';
 				}else{
@@ -437,7 +444,11 @@ function selected_site($blog_id){
 						<?php 
 							$sFirstImage = catch_first_post_image($post);
 							if ( has_post_thumbnail($post->ID)) {
-								echo get_the_post_thumbnail($post->ID, 'thumbnail-image-large'); 
+								if($i==1){
+									echo get_the_post_thumbnail($post->ID, 'thumbnail-image-large');
+								}else{
+									echo get_the_post_thumbnail($post->ID, 'thumbnail-image-small');
+								} 
 							}else if($sFirstImage!=''){
 								echo '<img src=\''.$sFirstImage.'\'>';
 							}else{
@@ -613,3 +624,25 @@ function clean_custom_resposive_menus() {
 	switch_to_blog( $original_blog_id );
 }
 
+// =================================
+// = Add comment callback function =
+// =================================
+function hannas_comments($comment, $args, $depth) {
+	$default = urlencode(get_bloginfo('template_directory') . '/images/default-avatar.png');
+	$GLOBALS['comment'] = $comment; ?>
+	<div <?php comment_class('comment-item'); ?> id="li-comment-<?php comment_ID() ?>">
+	 <div class="comment-item-left-part" id="comment-<?php comment_ID(); ?>">
+		<?php //echo get_avatar($comment,$size='55', $default ); ?>
+          <?php printf(__('<div class="comment-info">NAME<br/><span>%s</span></div>'), get_comment_author_link()) ?>
+      	<div class="comment-info">DATE<br/><span><?php printf(__('%1$s'), get_comment_date()) ?></span></div>
+      	<div class="comment-info">TIME<br/><span><?php printf(__('%1$s'), get_comment_time()) ?></span></div>
+  	  </div>
+  	  <div class="comment-item-right-part">
+      	<?php comment_text() ?>
+      	 <?php if ($comment->comment_approved == '0') : ?>
+         	<p><?php _e('Your comment is awaiting moderation.') ?></p>
+      	  <?php endif; ?>
+      </div>
+     </div>
+<?php
+}

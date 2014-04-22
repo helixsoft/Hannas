@@ -15,12 +15,26 @@
 		$('.comment-area').show();
 	}
 	$(".featuredVideo").fitVids();
-	$('#container').masonry({
+	//set the container that Masonry will be inside of in a var
+    var container = document.querySelector('#container');
+    //create empty var msnry
+    var msnry;
+    // initialize Masonry after all images have loaded
+    imagesLoaded( container, function() {
+        msnry = new Masonry( container, {
+              columnWidth: jQuery(document).width() > 800 ? 265 : jQuery(document).width() >= 600 ? 275 : 145 ,
+			  gutter: 10,
+			  itemSelector: '.item'
+        });
+    });
+	/*
+	var container = document.querySelector('#container');
+	var msnry = new Masonry( container, {
 	  // options
 	  columnWidth: jQuery(document).width() > 800 ? 265 : jQuery(document).width() >= 600 ? 275 : 145 ,
 	  gutter: 10,
 	  itemSelector: '.item'
-	});
+	});*/
 	var $container = $('#container');
 	$container.infinitescroll({
 	  navSelector  : '.nav-previous',    // selector for the paged navigation 

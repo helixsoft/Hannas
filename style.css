@@ -1040,6 +1040,29 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	.blog-info a{
 		text-decoration: none;
 	}
+	.blog-info-mobile{
+		font-size: 12px;
+		font-weight: 300;
+		line-height: 1;
+		color: #6c6b6b;
+		width: 100%;
+		table-layout: fixed;
+		display: none;
+	}
+	.blog-info-mobile th, .blog-info-mobile td
+	{
+		text-align:center;
+		padding:5px;
+	}
+	.blog-info-mobile span{
+		font-size: 12px;
+		font-weight: 400;
+		line-height: 1;
+		color: #383838;
+	}
+	.blog-info-mobile a{
+		text-decoration: none;
+	}
 	.comments{
 		padding: 0 57px;
 		margin-top: 18px;
@@ -1287,6 +1310,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		border-bottom: 1px solid #f1f1f0;
 		float: none;
 		margin: 0 auto;
+		z-index: 1;
 	}
 	.dl-menuwrapper:first-child {
 		margin-right: 100px;
@@ -1368,7 +1392,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	.dl-menuwrapper li > a:not(:only-child):after {
 		position: absolute;
 		top: 0;
-		line-height: 26px;
+		line-height: 33px;
 		font-family: 'icomoon';
 		speak: none;
 		-webkit-font-smoothing: antialiased;
@@ -1376,7 +1400,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	}
 	.dl-menuwrapper.blog-menu li.dl-back:after,
 	.dl-menuwrapper.blog-menu li > a:not(:only-child):after {
-		line-height: 22px;
+		line-height: 33px;
 	}
 	.dl-menuwrapper li.dl-back:after {
 		left: 10px;
@@ -2354,8 +2378,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.latest .col .thumbnail-image-large img{
 			width: 263px;
-			height: 200px;
-			max-height: 200px;
+			height: auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -50%;
+			margin-left: -50%; 
 		}
 		.latest .col .thumbnail-image-small{
 			width: 136px;
@@ -2382,8 +2410,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.latest .col .thumbnail-image-small img{
 			width: 136px;
-			height: 88px;
-			max-height: 88px;
+			height: auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -50%;
+			margin-left: -50%; 
 		}
 		.latest .col .thumbnail-image-small:nth-child(1){
 			margin-right: 11px;
@@ -2402,24 +2434,25 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			margin-bottom: 0px;
 		}
 		.featured{
-			height: 264px;
+			height: auto;
 			width: 560px;
 		}
 		.featuredVideo{
 			width: 560px;
+			margin-top: 43px;
 		}
 		.featured a{
 			width: 464px;
-			height: 244px;
+			height: auto;
 			margin: 20px auto;
 		}
 		.featured img{
 			width: 464px;
-			height: 224px;
+			height: auto;
 		}
 		.featured .hover-area{
 			width: 464px;
-			height: 224px;
+			height: calc(100% - 40px);
 			position: absolute;
 			top:20px;
 			left: 48px;
@@ -2454,7 +2487,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		.pick{
 			height: 283px;
 		}
-		.pick .thumbnail-image-pick:nth-last-child(-n+2){
+		.pick .thumbnail-image-pick:nth-child(n+7){
 			display: none;
 		}
 		.pick .thumbnail-image-pick:nth-child(-n+4){
@@ -2470,7 +2503,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			margin-right: 0px !important;
 		}
 		.contributors{
-			height: 1200px;
+			height: 100%;
 		}
 		.contributors-box .thumbnail-image-cont:nth-child(2n+2){
 			margin-right: 0px !important;
@@ -2544,6 +2577,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			display: block;
 			margin-bottom: 28px;
 		}
+		
 		.latest .col:last-child{
 			margin-right: 0px;
 			width: 300px;
@@ -2553,6 +2587,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		.latest .col .thumbnail-image-large{
 			width: 300px;
 			height: 228px;
+			text-align: center;
 		}
 		.latest .col .thumbnail-image-large .hover-area{
 			width: 300px;
@@ -2574,8 +2609,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.latest .col .thumbnail-image-large img{
 			width: 300px;
-			height: 228px;
-			max-height: 228px;
+			height: auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -50%;
+			margin-left: -50%; 
 		}
 		.latest .col .thumbnail-image-small{
 			width: 136px;
@@ -2602,8 +2641,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.latest .col .thumbnail-image-small img{
 			width: 136px;
-			height: 88px;
-			max-height: 88px;
+			height: auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -50%;
+			margin-left: -50%; 
 		}
 		.latest .col .thumbnail-image-small:nth-child(1){
 			margin-right: 28px;
@@ -2622,7 +2665,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 			margin-bottom: 0px;
 		}
 		.featured{
-			height: 141px;
+			height: auto;
 			width: 300px;
 		}
 		.featuredVideo{
@@ -2630,18 +2673,19 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.featured a{
 			width: 200px;
-			height: 105px;
+			height: auto;
 			margin: 18px auto;
 		}
 		.featured img{
 			width: 200px;
-			height: 105px;
+			height: auto;
 		}
 		.featured .hover-area{
 			width: 200px;
-			height: 105px;
+			height: calc(100% - 36px);
 			position: absolute;
 			top:18px;
+			left: 50px;
 		}
 		.featured .hover-area .count{
 			font-size: 105px;
@@ -2679,7 +2723,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.pick .thumbnail-image-pick img{
 			width: 145px;
-			height: 110px;
+			height: auto;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-top: -50%;
+			margin-left: -50%; 
 		}
 		.pick .thumbnail-image-pick .hover-area{
 			width: 145px;
@@ -2687,7 +2736,13 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.pick .thumbnail-image-pick .hover-area .text-area{
 			width: 145px;
-			height: 110px;
+			height: auto;
+		}
+		.pick .thumbnail-image-pick .hover-area .text-area .title{
+			font-size: 15px;
+		}
+		.pick .thumbnail-image-pick .hover-area .text-area .author{
+			font-size: 12px;
 		}
 		.pick .thumbnail-image-pick .hover-area .count{
 			width: 145px;
@@ -2790,9 +2845,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		.item .hover-area .text-area {
 			width: 145px;
 		}
-		.blog-info span{
-			display: block;
-			float: none;
+		.blog-info-mobile{
+			display: table;
+		}
+		.blog-info{
+			display: none;
 		}
 		.comments{
 			padding: 0;
