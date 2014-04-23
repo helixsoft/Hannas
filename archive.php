@@ -40,7 +40,7 @@ get_header(); ?>
 					$nbImg=count($result[0]);
 				?>
 				  	<div class="item" id="<?php echo $post->ID ?>">
-				  		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
+				  		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 				  			<?php
 								$sFirstImage = catch_first_post_image($post);
 								if ( has_post_thumbnail()) {

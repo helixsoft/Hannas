@@ -275,7 +275,7 @@ function list_post($name,$list){
 		$nbImg=count($result[0]);
 		?>
 		<div class="thumbnail-image-pick">
-			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
+			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
@@ -342,7 +342,7 @@ function latest_post($list){
 		$nbImg=count($result[0]);
 		?>
 		<div class="thumbnail-image-pick">
-			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
+			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
@@ -383,7 +383,7 @@ function featured_post($post_id,$blog_id){
 	$nbImg=count($result[0]);
 	?>
 	<div class="featured">
-		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
+		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 			<?php 
 				$sFirstImage = catch_first_post_image($post);
 				if ( has_post_thumbnail($post->ID)) {
@@ -440,7 +440,7 @@ function selected_site($blog_id){
 		?>
 			<?php if($i==1 || $i==2) { ?><div class="col"><?php } ?>
 			<?php if($i==1) { ?><div class="thumbnail-image-large"> <?php } if($i>1) { ?><div class="thumbnail-image-small"><?php } ?>
-					<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
+					<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 						<?php 
 							$sFirstImage = catch_first_post_image($post);
 							if ( has_post_thumbnail($post->ID)) {
@@ -502,7 +502,7 @@ function select_contributer($list){
 ?>
 
 	<div class="thumbnail-image-cont">
-		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> of images in <?php echo $post->post_title;?>">
+		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 			<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 				<?php if(ot_get_option( 'author_pic')) { ?>
 					<img src="<?php echo ot_get_option( 'author_pic')?>">
@@ -646,3 +646,16 @@ function hannas_comments($comment, $args, $depth) {
      </div>
 <?php
 }
+
+function html5_insert_image($html, $id, $caption, $title, $align, $url) {
+  $html5 .= "<figure id='post-$id media-$id' class='align-$align'>";
+  $html5 .= "<a href='$url'>";
+  $html5 .= "<img src='$url' alt='$title' />";
+  if ($caption) {
+    $html5 .= "<figcaption>$caption</figcaption>";
+  }
+  $html5 .= "</a>";
+  $html5 .= "</figure>";
+  return $html5;
+}
+add_filter( 'image_send_to_editor', 'html5_insert_image', 10, 9 );

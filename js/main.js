@@ -27,7 +27,7 @@
 			  itemSelector: '.item'
         });
     });
-	/*
+    /*
 	var container = document.querySelector('#container');
 	var msnry = new Masonry( container, {
 	  // options
@@ -48,7 +48,17 @@
 	  // trigger Masonry as a callback
 	  function( newElements ) {
 	    var $newElems = $( newElements );
-	    $container.masonry( 'appended', $newElems );
+	    var container = document.querySelector('#container');
+	    imagesLoaded( container, function() {
+	        msnry = new Masonry( container, {
+	              columnWidth: jQuery(document).width() > 800 ? 265 : jQuery(document).width() >= 600 ? 275 : 145 ,
+				  gutter: 10,
+				  itemSelector: '.item'
+	        });
+	        msnry.appended( $newElems );
+			msnry.layout();
+	    });
+        
 	  });
 })(jQuery);
 

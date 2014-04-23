@@ -48,7 +48,7 @@ function custom_theme_options() {
         array(
         'id'          => 'page_name',
         'label'       => __( 'About Page Text', 'Hannas' ),
-        'desc'        => __( 'Select page Text', 'Hannas' ),
+        'desc'        => __( 'Input link text', 'Hannas' ),
         'std'         => 'about HANNA',
         'type'        => 'text',
         'section'     => 'theme_settings',
@@ -78,7 +78,7 @@ function custom_theme_options() {
         array(
         'id'          => 'blog_archive_select',
         'label'       => __( 'Blog Archive', 'Hannas' ),
-        'desc'        => __( 'The Select Archive list you want', 'Hannas' ),
+        'desc'        => __( 'Select type of archive', 'Hannas' ),
         'std'         => 'yearly',
         'type'        => 'select',
         'section'     => 'theme_settings',
@@ -114,8 +114,8 @@ function custom_theme_options() {
       ),
         array(
             'id'          => 'archive_number_slider',
-            'label'       => __( 'Number of archive', 'Hannas' ),
-            'desc'        => __( 'Select Number of archive', 'Hannas' ),
+            'label'       => __( 'Number of archives', 'Hannas' ),
+            'desc'        => __( 'Set number of archives', 'Hannas' ),
             'std'         => '6',
             'type'        => 'numeric-slider',
             'section'     => 'theme_settings',
@@ -160,7 +160,7 @@ function custom_theme_options() {
          array(
         'id'          => 'first_select',
         'label'       => __( 'Select Latest Post Site', 'Hannas' ),
-        'desc'        => __( 'You can select blog post any site', 'Hannas' ),
+        'desc'        => __( 'Select site for latest post', 'Hannas' ),
         'std'         => '',
         'type'        => 'select',
         'section'     => 'theme_settings',
@@ -190,8 +190,8 @@ function custom_theme_options() {
       ),
          array(
         'id'          => 'featured_select',
-        'label'       => __( 'Select Site', 'Hannas' ),
-        'desc'        => __( 'Select Site From where you gona take post ID', 'Hannas' ),
+        'label'       => __( 'Select Site for Featured', 'Hannas' ),
+        'desc'        => __( 'Select site from for featured', 'Hannas' ),
         'std'         => '',
         'type'        => 'select',
         'section'     => 'theme_settings',
@@ -206,8 +206,8 @@ function custom_theme_options() {
       ),
         array(
         'id'          => 'featured_post_id',
-        'label'       => __( 'Post ID', 'Hannas' ),
-        'desc'        => __( 'The Post ID from selected site.', 'Hannas' ),
+        'label'       => __( 'Post ID for Featured post', 'Hannas' ),
+        'desc'        => __( 'Input the Post ID selected site. Ex: post.php?post=6&action=edit', 'Hannas' ),
         'std'         => '',
         'type'        => 'text',
         'section'     => 'theme_settings',
@@ -237,7 +237,7 @@ function custom_theme_options() {
         array(
         'id'          => 'pick_type',
         'label'       => __( 'Latest or Category', 'Hannas' ),
-        'desc'        => __( 'Latest posts form entire network or you can setect category form entire network', 'Hannas' ),
+        'desc'        => __( 'Select latest post or specific category from entire network', 'Hannas' ),
         'std'         => '',
         'type'        => 'radio',
         'section'     => 'theme_settings',
@@ -263,8 +263,8 @@ function custom_theme_options() {
       ),
         array(
         'id'          => 'pick_site_checkbox',
-        'label'       => __( 'Select Site in Checkbox', 'Hannas' ),
-        'desc'        => __( 'Select Multiple Site in Checkbox', 'Hannas' ),
+        'label'       => __( 'Select Sites for Latest or Category', 'Hannas' ),
+        'desc'        => __( 'Select one or multiple sites', 'Hannas' ),
         'std'         => '',
         'type'        => 'checkbox',
         'section'     => 'theme_settings',
@@ -340,8 +340,8 @@ function custom_theme_options() {
       ),
          array(
         'id'          => 'contributors_site_checkbox',
-        'label'       => __( 'Select Site in Checkbox', 'Hannas' ),
-        'desc'        => __( 'Select Multiple Site in Checkbox', 'Hannas' ),
+        'label'       => __( 'Select Site to appear in Contributors', 'Hannas' ),
+        'desc'        => __( 'Select with mutiple sites with checkboxes', 'Hannas' ),
         'std'         => '',
         'type'        => 'checkbox',
         'section'     => 'theme_settings',

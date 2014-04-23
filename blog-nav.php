@@ -3,13 +3,13 @@
 					<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 						<?php if(ot_get_option( 'page_select')) { ?>
 							<?php if(ot_get_option( 'page_name')) { ?>
-								<li><a href="<?php echo get_permalink(ot_get_option( 'page_select'));?>"><span>about</span><span><?php echo ot_get_option( 'page_name');?></span></a></li>
+								<li><a href="<?php echo get_permalink(ot_get_option( 'page_select'));?>"><span><?php echo ot_get_option( 'page_name');?></span></a></li>
 							<?php } else { ?>
 								<li><a href="<?php echo get_permalink(ot_get_option( 'page_select'));?>"><span>about</span><span>HANNA</span></a></li>
 							<?php } ?>
 						<?php } else { ?>
 							<?php if(ot_get_option( 'page_name')) { ?>
-								<li><a href="#"><span>about</span><span><?php echo ot_get_option( 'page_name');?></span></a></li>
+								<li><a href="#"><span><?php echo ot_get_option( 'page_name');?></span></a></li>
 							<?php } else { ?>
 								<li><a href="#"><span>about</span><span>HANNA</span></a></li>
 							<?php } ?>
@@ -86,7 +86,7 @@
 				</ul>
 			</nav>
 			<div id="blog-menu" class="dl-menuwrapper blog-menu">
-				<button class="dl-trigger">Open Menu</button>
+				<button class="dl-trigger">BLOG MENU</button>
 				<ul class="dl-menu">
 					<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 						<?php if(ot_get_option( 'page_select')) { ?>

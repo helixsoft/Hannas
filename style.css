@@ -927,7 +927,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
   text-align: center;
 	}
 	nav.blog_nav li a{
-		text-transform: uppercase;
 		text-decoration: none;
 		color: #000;
 		font-size: 12px;
@@ -938,10 +937,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		padding-bottom: 16px;
 		border: none;
 		padding-right: 0px;
-	}
-	nav.blog_nav li a span:nth-of-type(1){
-		text-transform: lowercase;
-		margin-right: 5px;
 	}
 	nav.blog_nav li a span.arrow{
 		width: 7px;
@@ -1012,12 +1007,12 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-family: 'Times New Roman', Times, serif;
 		color:#383838;
 	}
-	.my-content a{
+	.my-content figure{
 		width: auto;
 		margin: 0 -160px 20px;
 		display: block;
 	}
-	.my-content p a img{
+	.my-content figure img{
 		display: block;
 		max-width: 100%;
 		position: relative;
@@ -1169,6 +1164,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		font-weight: 300;
 		color: #9b9b9b;
 		font-size: 12px;
+		float: left;
 	}
 	.comment-form-area input[type="submit"]{
 		background: #f5f4f4;
@@ -1331,16 +1327,36 @@ Use it to make something cool, have fun, and share what you've learned with othe
 	}
 	.dl-menuwrapper.blog-menu button{
 		left: 50%;
+		text-indent: 0px;
+		width: auto;
+		height: auto;
+		background: #fff;
 		-webkit-transform:translate(-50%, 0%);
 		-moz-transform:translate(-50%, 0%);
 		transform:translate(-50%, 0%);
 	}
+	.dl-menuwrapper.blog-menu button:after{
+		content: '';
+		position: absolute;
+		width: 7px;
+		height: 7px;
+		display: inline-block;
+		background: url(images/menu-arrow.png) 0px 0px no-repeat;
+		left: 76px;
+		top: 12px;
+	}
+	
 	.dl-menuwrapper button:hover,
 	.dl-menuwrapper button.dl-active,
 	.dl-menuwrapper ul {
 		background: #aaa;
 	}
-
+	.dl-menuwrapper.blog-menu button:hover{
+		background: #fff;
+	}
+	.dl-menuwrapper.blog-menu button:hover:after{
+		background: url(images/menu-arrow.png) -7px 0px no-repeat;
+	}
 	.dl-menuwrapper button:after {
 		content: '';
 		position: absolute;
@@ -2554,6 +2570,15 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		.item .hover-area .text-area {
 			width: 275px;
 		}
+		.my-content {
+			margin-top: 30px;
+			padding: 0 100px;
+			font-family: 'Times New Roman', Times, serif;
+			color: #383838;
+		}
+		.my-content figure{
+			margin: 0 -100px 20px;
+		}
 	}
 	@media only screen and (min-width: 320px) and (max-width: 599px){
 		.container{
@@ -2853,5 +2878,14 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.comments{
 			padding: 0;
+		}
+		.my-content figure{
+			margin: 0 -10px 20px;
+		}
+		.my-content figure img {
+			width: 100%;
+		}
+		.my-content {
+			padding: 0 10px;
 		}
 	}

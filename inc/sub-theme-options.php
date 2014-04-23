@@ -48,7 +48,7 @@ function custom_theme_options() {
         array(
         'id'          => 'page_name',
         'label'       => __( 'About Page Text', 'Hannas' ),
-        'desc'        => __( 'Select page Text', 'Hannas' ),
+        'desc'        => __( 'Input link text', 'Hannas' ),
         'std'         => 'about HANNA',
         'type'        => 'text',
         'section'     => 'theme_settings',
@@ -78,7 +78,7 @@ function custom_theme_options() {
         array(
         'id'          => 'blog_archive_select',
         'label'       => __( 'Blog Archive', 'Hannas' ),
-        'desc'        => __( 'The Select Archive list you want', 'Hannas' ),
+        'desc'        => __( 'Select type of archive', 'Hannas' ),
         'std'         => 'yearly',
         'type'        => 'select',
         'section'     => 'theme_settings',
@@ -114,8 +114,8 @@ function custom_theme_options() {
       ),
       array(
         'id'          => 'archive_number_slider',
-        'label'       => __( 'Number of archive', 'Hannas' ),
-        'desc'        => __( 'Select Number of archive', 'Hannas' ),
+        'label'       => __( 'Number of archives', 'Hannas' ),
+        'desc'        => __( 'Set number of archives', 'Hannas' ),
         'std'         => '6',
         'type'        => 'numeric-slider',
         'section'     => 'theme_settings',

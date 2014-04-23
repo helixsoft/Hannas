@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying Category pages
+ * Category Template: Special
  *
  */
 
@@ -19,7 +19,7 @@ get_header(); ?>
 				get_template_part( 'blog-nav');
 			?>
 			<?php if ( have_posts() ) : ?>
-				<h1 class="title" align="center"><?php printf( __( 'Category Archives: %s', 'Hannas' ), single_cat_title( '', false ) ); ?></h1>
+				<h1 class="title" align="center"><?php printf( __( '%s', 'Hannas' ), single_cat_title( '', false ) ); ?></h1>
 				<div id="container">
 				<?php /* The loop */ ?>
 				<?php 
