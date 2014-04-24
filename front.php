@@ -5,7 +5,7 @@ Template Name: Front Page
 get_header(); ?>
 		<?php if ( function_exists( 'ot_get_option' ) ) { ?>
 			<?php if(ot_get_option( 'first_on_off','on')=='on') { ?>
-				<?php selected_site(ot_get_option('first_select')); ?>
+					<?php selected_site(ot_get_option('first_select'),ot_get_option( 'exclude_cat')); ?>
 			<?php } ?>
 		<?php } ?>
 		<?php if ( function_exists( 'ot_get_option' ) ) { ?>

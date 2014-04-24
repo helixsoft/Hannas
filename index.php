@@ -19,6 +19,16 @@ get_header();?>
 			?>
 			<div id="container">
 			<?php
+				if( is_multisite() ){
+					if(is_main_site( get_current_blog_id() )){
+						if ( function_exists( 'ot_get_option' ) ) { 
+							if(ot_get_option( 'exclude_cat')){
+								$args='cat='.ot_get_option( 'exclude_cat');
+								query_posts($args);
+							}
+						}
+					}
+				}
 				if ( have_posts() ) :
 					// Start the Loop.
 					while ( have_posts() ) : the_post();

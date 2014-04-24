@@ -142,6 +142,21 @@ function custom_theme_options() {
         'condition'   => '',
         'operator'    => 'and'
       ),
+        array(
+        'id'          => 'exclude_cat',
+        'label'       => __( 'Exclude Special Categories', 'Hannas' ),
+        'desc'        => __( 'Exclude Special Categories Ids with comma sperator','Hannas'),
+        'std'         => '',
+        'type'        => 'text',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
+      ),
          array(
         'id'          => 'first_on_off',
         'label'       => __( 'Blog Latest On/Off', 'Hannas' ),

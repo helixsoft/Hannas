@@ -1,12 +1,44 @@
 <div class="latest-text">LATEST POSTS</div>
 <?php
 if ( is_single() ) {
-  $cats = wp_get_post_categories($post->ID);
-    $args=array(
-      'post__not_in' => array($post->ID),
-      'showposts'=>20,
-      'caller_get_posts'=>1
-    );
+  	$cats = wp_get_post_categories($post->ID);
+  	if( is_multisite() ){
+		if(is_main_site( get_current_blog_id() )){
+			if ( function_exists( 'ot_get_option' ) ) { 
+				if(ot_get_option( 'exclude_cat')){
+					$result=array_intersect($cats,explode(',',implode('',explode("-", ot_get_option( 'exclude_cat')))));
+					if(!empty($result)){
+						 $args=array(
+					      'post__not_in' => array($post->ID),
+					      'showposts'=>20,
+					      'caller_get_posts'=>1,
+					      'category__in'=>$result[0]
+					    );
+					}else{
+						$args=array(
+					      'post__not_in' => array($post->ID),
+					      'showposts'=>20,
+					      'caller_get_posts'=>1,
+					      'cat'=>'cat='.ot_get_option( 'exclude_cat')
+					    );
+					}	
+				}else{
+					$args=array(
+				      'post__not_in' => array($post->ID),
+				      'showposts'=>20,
+				      'caller_get_posts'=>1
+				    );
+				}
+			}
+		}else{
+			$args=array(
+		      'post__not_in' => array($post->ID),
+		      'showposts'=>20,
+		      'caller_get_posts'=>1
+		    );
+		}
+	}
+    
     $my_query = new WP_Query($args);
     if( $my_query->have_posts() ) { ?>
       <div id="container">

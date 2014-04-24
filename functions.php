@@ -407,7 +407,7 @@ function featured_post($post_id,$blog_id){
 	switch_to_blog( $original_blog_id ); //switched back to current blog
 } 
 
-function selected_site($blog_id){
+function selected_site($blog_id,$exclude_cat){
 	$original_blog_id = get_current_blog_id();
 	if($blog_id){
 		switch_to_blog($blog_id); //switched to blog with blog_id $bid
@@ -420,6 +420,7 @@ function selected_site($blog_id){
 		'order'            => 'DESC',
 		'include'          => '',
 		'exclude'          => '',
+		'cat' 			   => $exclude_cat,
 		'meta_key'         => '',
 		'meta_value'       => '',
 		'post_type'        => 'post',
@@ -542,10 +543,15 @@ function clean_custom_menus() {
     $submenu = false;
     foreach( $menuitems as $item ):
         // get page id from using menu item object id
-        $id = get_post_meta( $item->ID, '_menu_item_object_id', true );
-        // set up a page object to retrieve page data
-        $page = get_page( $id );
-        $link = get_page_link( $id );
+    	if($item->object!='category'){
+        	$id = get_post_meta( $item->ID, '_menu_item_object_id', true );
+        	// set up a page object to retrieve page data
+        	$page = get_page( $id );
+        	$link = get_page_link( $id );
+    	}else{
+    		$link = $item->url;
+    		$title =$item->title;
+    	}
 
         // item does not have a parent so menu_item_parent equals 0 (false)
         if ( !$item->menu_item_parent ):
@@ -553,7 +559,11 @@ function clean_custom_menus() {
         // save this id for later comparison with sub-menu items
         $parent_id = $item->ID;
     ?>
-    	<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
+    	<?php if($item->object!='category'){ ?>
+    		<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
+    	<?php } else { ?>
+    		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
+    	<?php } ?>
     <?php endif; ?>
     <?php if ( $parent_id == $item->menu_item_parent ): ?>
     <?php if ( !$submenu ): $submenu = true; $k=0;$i=0;?>
@@ -592,10 +602,15 @@ function clean_custom_resposive_menus() {
     $submenu = false;
     foreach( $menuitems as $item ):
         // get page id from using menu item object id
-        $id = get_post_meta( $item->ID, '_menu_item_object_id', true );
-        // set up a page object to retrieve page data
-        $page = get_page( $id );
-        $link = get_page_link( $id );
+        if($item->object!='category'){
+        	$id = get_post_meta( $item->ID, '_menu_item_object_id', true );
+        	// set up a page object to retrieve page data
+        	$page = get_page( $id );
+        	$link = get_page_link( $id );
+    	}else{
+    		$link = $item->url;
+    		$title =$item->title;
+    	}
 
         // item does not have a parent so menu_item_parent equals 0 (false)
         if ( !$item->menu_item_parent ):
@@ -603,7 +618,11 @@ function clean_custom_resposive_menus() {
         // save this id for later comparison with sub-menu items
         $parent_id = $item->ID;
     ?>
-    	<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
+    	<?php if($item->object!='category'){ ?>
+    		<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
+    	<?php } else { ?>
+    		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
+    	<?php } ?>
     <?php endif; ?>
     <?php if ( $parent_id == $item->menu_item_parent ): ?>
     <?php if ( !$submenu ): $submenu = true; ?>
