@@ -543,8 +543,14 @@ function clean_custom_menus() {
     $submenu = false;
     foreach( $menuitems as $item ):
         // get page id from using menu item object id
-    	if($item->object!='category'){
-        	$id = get_post_meta( $item->ID, '_menu_item_object_id', true );
+    	if($item->type=='custom'){
+    		$link = $item->url;
+    		$title =$item->title;
+    	}else if($item->type=='taxonomy'){
+        	$link = $item->url;
+    		$title =$item->title;
+    	} else if($item->type=='post_type'){
+    		$id = get_post_meta( $item->ID, '_menu_item_object_id', true );
         	// set up a page object to retrieve page data
         	$page = get_page( $id );
         	$link = get_page_link( $id );
@@ -559,7 +565,11 @@ function clean_custom_menus() {
         // save this id for later comparison with sub-menu items
         $parent_id = $item->ID;
     ?>
-    	<?php if($item->object!='category'){ ?>
+    	<?php if($item->type=='custom'){ ?>
+    		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
+    	<?php }else if($item->type=='taxonomy') {?>
+    		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
+    	<?php } else if($item->type=='post_type'){ ?>
     		<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
     	<?php } else { ?>
     		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
@@ -571,7 +581,15 @@ function clean_custom_menus() {
     <?php endif; ?>
     		<?php if($i%4==0 && $k==1) { ?></div> <?php } ?>
     		<?php if($i%4==0 && $i >= 0) { ?> <div class="col"> <?php $k=1; } ?>
-     		<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a></li>
+     		<?php if($item->type=='custom'){ ?>
+	    		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
+	    	<?php }else if($item->type=='taxonomy') {?>
+	    		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
+	    	<?php } else if($item->type=='post_type'){ ?>
+	    		<li><a href="<?php echo $link; ?>"><?php echo $page->post_title; ?></a>
+	    	<?php } else { ?>
+	    		<li><a href="<?php echo $link; ?>"><?php echo $title; ?></a>
+	    	<?php } ?>
      		<?php $i++;?>
     <?php if ( $menuitems[ $count + 1 ]->menu_item_parent != $parent_id && $submenu ): ?>
             <?php if($i%4!=0) { ?> </div> <?php } ?></ul>
@@ -646,7 +664,7 @@ function clean_custom_resposive_menus() {
 // =================================
 // = Add comment callback function =
 // =================================
-function hannas_comments($comment, $args, $depth) {
+function imbalance_comments($comment, $args, $depth) {
 	$default = urlencode(get_bloginfo('template_directory') . '/images/default-avatar.png');
 	$GLOBALS['comment'] = $comment; ?>
 	<div <?php comment_class('comment-item'); ?> id="li-comment-<?php comment_ID() ?>">

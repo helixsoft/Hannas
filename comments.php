@@ -22,7 +22,7 @@
 		<div class="toggle-comment"><span>SHOW</span> COMMENTS</div>
 	</div>
 	<div class="comment-area clearfix">
-		<?php wp_list_comments(array('avatar_size' => '55', 'callback' => 'hannas_comments'  )); ?>
+		<?php wp_list_comments(array('avatar_size' => '55', 'callback' => 'imbalance_comments'  )); ?>
 	</div>
  <?php else : // this is displayed if there are no comments so far ?>
 

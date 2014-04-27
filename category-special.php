@@ -18,15 +18,58 @@ get_header(); ?>
 			<?php
 				get_template_part( 'blog-nav');
 			?>
+			<?php
+		        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; 
+		        if($paged==1){?>
+		    	<?php if ( have_posts() ) : ?>
+					<?php
+					// Start the Loop. 
+					query_posts( 'posts_per_page=1' );
+					while ( have_posts() ) : the_post();?>
+						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+							<h1 class="title" align="center"><a href="<?php echo get_permalink() ?>"><?php the_title()?></a></h1>
+							<h6 class="date" align="center"><?php the_date('l j M Y') ?></h6>
+							<div class="my-content">
+								<?php the_content();?>
+							</div>
+							<?php $tempPostId=get_the_ID();?>
+							<div class="blog-info">
+								<span>DATE</span> <?php echo get_the_date('Y-m-d') ?>  | <span>CATEGORY</span> <?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'Hannas' ) ); ?> | <?php if(has_tag()) { ?><span>TAGS</span> <?php the_tags('',',','') ?> | <?php } ?> <span>SHARE</span>
+							</div>
+							<table class="blog-info-mobile">
+								<tr>
+								  <th><span>Date</span></th>
+								  <th><span>CATEGORY</span></th>		
+								  <?php if(has_tag()) { ?><th><span>TAG</span></th> <?php } ?>
+								  <th><span>Share</span></th>
+								</tr>
+								<tr>
+								  <td><?php echo get_the_date('Y-m-d') ?></td>
+								  <td><?php echo get_the_category_list( _x( ', ', 'Used between list items, there is a space after the comma.', 'Hannas' ) ); ?></td>
+								  <?php if(has_tag()) { ?><td><?php the_tags('',',','') ?></td><?php } ?>
+								  <td></td>
+								</tr>
+							</table>
+						</article>
+						<?php global $withcomments; $withcomments = true; comments_template('',true); ?>
+				<?php endwhile; ?>
+				<?php endif; ?>
+		    <?php } ?>
+		    <?php wp_reset_query(); ?>
 			<?php if ( have_posts() ) : ?>
-				<h1 class="title" align="center"><?php printf( __( '%s', 'Hannas' ), single_cat_title( '', false ) ); ?></h1>
+				<div class="latest-text">LATEST POSTS</div>
+		
 				<div id="container">
-				<?php /* The loop */ ?>
+				
 				<?php 
-					while ( have_posts() ) : the_post(); 
+					$i=0;
+					while ( have_posts()) : the_post(); 
 					preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 					$nbImg=count($result[0]);
 				?>
+				<?php 
+					if($paged==1 && $i==0){
+					}else{ ?>
 				  	<div class="item" id="<?php echo $post->ID ?>">
 				  		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 				  			<?php
@@ -48,6 +91,7 @@ get_header(); ?>
 							</div>
 				  		</a>
 				  	</div>
+				  <?php } $i++;?>
 				<?php endwhile; ?>
 				</div>
 				<?php hannas_paging_nav(); ?>
