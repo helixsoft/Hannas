@@ -100,11 +100,6 @@ function custom_theme_options() {
             'label'       => __( 'monthly', 'Hannas' ),
             'src'         => ''
           ),
-           array(
-            'value'       => 'weekly',
-            'label'       => __( 'weekly', 'Hannas' ),
-            'src'         => ''
-          ),
           array(
             'value'       => 'daily',
             'label'       => __( 'daily', 'Hannas' ),
@@ -133,21 +128,6 @@ function custom_theme_options() {
         'desc'        => __('Put 243x194 size image for author','Hannas'),
         'std'         => '',
         'type'        => 'upload',
-        'section'     => 'theme_settings',
-        'rows'        => '',
-        'post_type'   => '',
-        'taxonomy'    => '',
-        'min_max_step'=> '',
-        'class'       => '',
-        'condition'   => '',
-        'operator'    => 'and'
-      ),
-        array(
-        'id'          => 'exclude_cat',
-        'label'       => __( 'Exclude Special Categories', 'Hannas' ),
-        'desc'        => __( 'Exclude Special Categories Ids with comma sperator','Hannas'),
-        'std'         => '',
-        'type'        => 'text',
         'section'     => 'theme_settings',
         'rows'        => '',
         'post_type'   => '',
@@ -187,6 +167,21 @@ function custom_theme_options() {
         'condition'   => '',
         'operator'    => 'and',
         'choices'     => theme_option_list_blog(),
+      ),
+         array(
+        'id'          => 'exclude_cat',
+        'label'       => __( 'Exclude Special Categories', 'Hannas' ),
+        'desc'        => __( 'Exclude Special Categories Ids with comma sperator','Hannas'),
+        'std'         => '',
+        'type'        => 'text',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
       ),
          array(
         'id'          => 'featured_on_off',

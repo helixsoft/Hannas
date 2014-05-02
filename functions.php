@@ -273,13 +273,23 @@ function list_post($name,$list){
 		$post = get_post($key->ID);
 		preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 		$nbImg=count($result[0]);
+		if(count($result[0])==0){
+			preg_match_all('/<img[^>]+>/i',$post->post_content, $result);
+			$nbImg=count($result[0]);
+		}
 		?>
 		<div class="thumbnail-image-pick">
 			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
-						echo get_the_post_thumbnail($post->ID, 'thumbnail-image-pick'); 
+						$url = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'thumbnail-image-pick');;
+						if(files_exist($url[0])){
+							echo get_the_post_thumbnail($post->ID, 'thumbnail-image-pick'); 
+						}else{
+							$string='sites/'.$key->blog_id.'/';
+							echo '<img src=\''.files_urlchange($url[0],$string).'\'>';
+						} 
 					}else if($sFirstImage!=''){
 						echo '<img src=\''.$sFirstImage.'\'>';
 					}else{
@@ -340,13 +350,23 @@ function latest_post($list){
 		$post = get_post($key->ID);
 		preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 		$nbImg=count($result[0]);
+		if(count($result[0])==0){
+			preg_match_all('/<img[^>]+>/i',$post->post_content, $result);
+			$nbImg=count($result[0]);
+		}
 		?>
 		<div class="thumbnail-image-pick">
 			<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 				<?php 
 					$sFirstImage = catch_first_post_image($post);
 					if ( has_post_thumbnail($post->ID)) {
-						echo get_the_post_thumbnail($post->ID, 'thumbnail-image-pick'); 
+						$url = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'thumbnail-image-pick');;
+						if(files_exist($url[0])){
+							echo get_the_post_thumbnail($post->ID, 'thumbnail-image-pick'); 
+						}else{
+							$string='sites/'.$key->blog_id.'/';
+							echo '<img src=\''.files_urlchange($url[0],$string).'\'>';
+						} 
 					}else if($sFirstImage!=''){
 						echo '<img src=\''.$sFirstImage.'\'>';
 					}else{
@@ -381,13 +401,23 @@ function featured_post($post_id,$blog_id){
 	}
 	preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 	$nbImg=count($result[0]);
+	if(count($result[0])==0){
+		preg_match_all('/<img[^>]+>/i',$post->post_content, $result);
+		$nbImg=count($result[0]);
+	}
 	?>
 	<div class="featured">
 		<a href="<?php echo get_permalink( $post->ID ) ?>" title="<?php echo $nbImg?> images in <?php echo $post->post_title;?>">
 			<?php 
 				$sFirstImage = catch_first_post_image($post);
 				if ( has_post_thumbnail($post->ID)) {
-					echo get_the_post_thumbnail($post->ID, 'thumbnail-featured'); 
+					$url = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'thumbnail-featured');;
+					if(files_exist($url[0])){
+						echo get_the_post_thumbnail($post->ID, 'thumbnail-featured'); 
+					}else{
+						$string='sites/'.$blog_id.'/';
+						echo '<img src=\''.files_urlchange($url[0],$string).'\'>';
+					} 
 				}else if($sFirstImage!=''){
 					echo '<img src=\''.$sFirstImage.'\'>';
 				}else{
@@ -438,6 +468,10 @@ function selected_site($blog_id,$exclude_cat){
 		    setup_postdata( $post );
 			preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 			$nbImg=count($result[0]);
+			if(count($result[0])==0){
+				preg_match_all('/<img[^>]+>/i',$post->post_content, $result);
+				$nbImg=count($result[0]);
+			}
 		?>
 			<?php if($i==1 || $i==2) { ?><div class="col"><?php } ?>
 			<?php if($i==1) { ?><div class="thumbnail-image-large"> <?php } if($i>1) { ?><div class="thumbnail-image-small"><?php } ?>
@@ -446,9 +480,21 @@ function selected_site($blog_id,$exclude_cat){
 							$sFirstImage = catch_first_post_image($post);
 							if ( has_post_thumbnail($post->ID)) {
 								if($i==1){
-									echo get_the_post_thumbnail($post->ID, 'thumbnail-image-large');
+									$url = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'thumbnail-image-large');
+									if(files_exist($url[0])){
+										echo get_the_post_thumbnail($post->ID, 'thumbnail-image-large'); 
+									}else{
+										$string='sites/'.$blog_id.'/';
+										echo '<img src=\''.files_urlchange($url[0],$string).'\'>';
+									}
 								}else{
-									echo get_the_post_thumbnail($post->ID, 'thumbnail-image-small');
+									$url = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'thumbnail-image-small');
+									if(files_exist($url[0])){
+										echo get_the_post_thumbnail($post->ID, 'thumbnail-image-small'); 
+									}else{
+										$string='sites/'.$blog_id.'/';
+										echo '<img src=\''.files_urlchange($url[0],$string).'\'>';
+									}
 								} 
 							}else if($sFirstImage!=''){
 								echo '<img src=\''.$sFirstImage.'\'>';
@@ -500,6 +546,10 @@ function select_contributer($list){
     	setup_postdata( $post );
     	preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 		$nbImg=count($result[0]);
+		if(count($result[0])==0){
+			preg_match_all('/<img[^>]+>/i',$post->post_content, $result);
+			$nbImg=count($result[0]);
+		}
 ?>
 
 	<div class="thumbnail-image-cont">
@@ -696,3 +746,15 @@ function html5_insert_image($html, $id, $caption, $title, $align, $url) {
   return $html5;
 }
 add_filter( 'image_send_to_editor', 'html5_insert_image', 10, 9 );
+
+function files_exist($url){
+	if (file_exists($url)) {
+      return true;
+	} else {
+	  return false;
+	}
+}
+function files_urlchange($url,$string){
+	$new_url = str_replace($string, "", $url);
+    return $new_url;
+}

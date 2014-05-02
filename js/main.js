@@ -30,7 +30,7 @@
       nextSelector : '.nav-previous a',  // selector for the NEXT link (to page 2)
       itemSelector : '.item',     // selector for all items you'll retrieve
       loading: {
-          finishedMsg: 'No more pages to load.',
+          finishedMsg: '',
           img: 'http://i.imgur.com/6RMhx.gif'
         }
       },

@@ -18,13 +18,18 @@ get_header(); ?>
 			<?php
 				get_template_part( 'blog-nav');
 			?>
-			<?php
+			<?php 
 		        $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; 
 		        if($paged==1){?>
 		    	<?php if ( have_posts() ) : ?>
 					<?php
-					// Start the Loop. 
-					query_posts( 'posts_per_page=1' );
+					// Start the Loop.
+					$cat_id=get_cat_ID( single_cat_title( '', false )); 
+					$arg=array(
+						'posts_per_page' => 1,
+						'cat' => $cat_id
+					);
+					query_posts( $arg );
 					while ( have_posts() ) : the_post();?>
 						<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 							<h1 class="title" align="center"><a href="<?php echo get_permalink() ?>"><?php the_title()?></a></h1>
@@ -66,6 +71,10 @@ get_header(); ?>
 					while ( have_posts()) : the_post(); 
 					preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 					$nbImg=count($result[0]);
+					if(count($result[0])==0){
+						preg_match_all('/<img[^>]+>/i',$post->post_content, $result);
+						$nbImg=count($result[0]);
+					}
 				?>
 				<?php 
 					if($paged==1 && $i==0){
@@ -75,7 +84,13 @@ get_header(); ?>
 				  			<?php
 								$sFirstImage = catch_first_post_image($post);
 								if ( has_post_thumbnail()) {
-									echo get_the_post_thumbnail($post->ID, 'thumbnail-image-item'); 
+									$url = wp_get_attachment_image_src(get_post_thumbnail_id(), 'thumbnail-image-item');;
+									if(files_exist($url[0])){
+										echo get_the_post_thumbnail($post->ID, 'thumbnail-image-item'); 
+									}else{
+										$string='sites/'.get_current_blog_id().'/';
+										echo '<img src=\''.files_urlchange($url[0],$string).'\'>';
+									}
 								}else if($sFirstImage!=''){
 									echo '<img src=\''.$sFirstImage.'\'>';
 								}else{
@@ -95,5 +110,5 @@ get_header(); ?>
 				<?php endwhile; ?>
 				</div>
 				<?php hannas_paging_nav(); ?>
-			<?php endif; ?>
+			<?php endif;?>
 <?php get_footer(); ?>

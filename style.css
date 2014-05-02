@@ -2341,6 +2341,11 @@ Use it to make something cool, have fun, and share what you've learned with othe
           object {
             max-width: 100%;
           }
+          #infscr-loading {
+	text-align: center;
+position: relative;
+top: 95%;
+}
 	@media only screen and (min-width: 801px){
 		.dl-menuwrapper{
 			display: none;
@@ -2534,10 +2539,6 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		}
 		.my-content p.center{
 			padding: 0;
-		}
-		.my-content p img{
-			width: 446px;
-			height: auto;
 		}
 		.comment-area .comment-item .comment-item-left-part{
 			width: 160px;
@@ -2829,10 +2830,10 @@ Use it to make something cool, have fun, and share what you've learned with othe
 		.my-content p.center{
 			padding: 0;
 		}
-		.my-content p img{
+		/*.my-content p img{
 			width: 186px;
 			height: auto;
-		}
+		}*/
 		.comment-area .comment-item .comment-item-left-part{
 			width: 70px;
 		}
