@@ -758,3 +758,50 @@ function files_urlchange($url,$string){
 	$new_url = str_replace($string, "", $url);
     return $new_url;
 }
+
+function scrape_instagram($username, $slice) {
+
+	if (false === ($instagram = get_transient('instagram-photos-'.sanitize_title_with_dashes($username)))) {
+		
+		$remote = wp_remote_get('http://instagram.com/'.trim($username));
+
+		if (is_wp_error($remote)) 
+  			return new WP_Error('site_down', __('Unable to communicate with Instagram.', 'Hannas'));
+
+			if ( 200 != wp_remote_retrieve_response_code( $remote ) ) 
+				return new WP_Error('invalid_response', __('Instagram did not return a 200.', 'Hannas'));
+
+		$shards = explode('window._sharedData = ', $remote['body']);
+		$insta_json = explode(';</script>', $shards[1]);
+		$insta_array = json_decode($insta_json[0], TRUE);
+
+		if (!$insta_array)
+  			return new WP_Error('bad_json', __('Instagram has returned invalid data.', 'Hannas'));
+
+		$images = $insta_array['entry_data']['UserProfile'][0]['userMedia'];
+
+		$instagram = array();
+		foreach ($images as $image) {
+
+			if ($image['type'] == 'image' && $image['user']['username'] == $username) {
+
+				$instagram[] = array(
+					'description' 	=> $image['caption']['text'],
+					'link' 			=> $image['link'],
+					'time'			=> $image['created_time'],
+					'comments' 		=> $image['comments']['count'],
+					'likes' 		=> $image['likes']['count'],
+					'thumbnail' 	=> $image['images']['thumbnail'],
+					'large' 		=> $image['images']['standard_resolution']
+				);
+			}
+		}
+
+		$instagram = base64_encode( serialize( $instagram ) );
+		set_transient('instagram-photos-'.sanitize_title_with_dashes($username), $instagram, apply_filters('null_instagram_cache_time', HOUR_IN_SECONDS*2));
+	}
+
+	$instagram = unserialize( base64_decode( $instagram ) );
+
+	return array_slice($instagram, 0, $slice);
+}

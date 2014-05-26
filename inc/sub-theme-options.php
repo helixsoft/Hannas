@@ -142,6 +142,51 @@ function custom_theme_options() {
         'condition'   => '',
         'operator'    => 'and'
       ),
+       array(
+            'id'          => 'number_of_latest_in_single',
+            'label'       => __( 'Number of latest post in single page', 'Hannas' ),
+            'desc'        => __( 'Set number of latest post', 'Hannas' ),
+            'std'         => '6',
+            'type'        => 'numeric-slider',
+            'section'     => 'theme_settings',
+            'rows'        => '',
+            'post_type'   => '',
+            'taxonomy'    => '',
+            'min_max_step'=> '1,50,1',
+            'class'       => '',
+            'condition'   => '',
+            'operator'    => 'and'
+          ),
+       array(
+        'id'          => 'instagram_username',
+        'label'       => __( 'Instagram Username', 'Hannas' ),
+        'desc'        => __( 'Instagram Username','Hannas'),
+        'std'         => '',
+        'type'        => 'text',
+        'section'     => 'theme_settings',
+        'rows'        => '',
+        'post_type'   => '',
+        'taxonomy'    => '',
+        'min_max_step'=> '',
+        'class'       => '',
+        'condition'   => '',
+        'operator'    => 'and'
+      ),
+       array(
+            'id'          => 'number_of_instagram_in_single',
+            'label'       => __( 'Number of Instagram Image in single page', 'Hannas' ),
+            'desc'        => __( 'Set number of Instagram Image', 'Hannas' ),
+            'std'         => '6',
+            'type'        => 'numeric-slider',
+            'section'     => 'theme_settings',
+            'rows'        => '',
+            'post_type'   => '',
+            'taxonomy'    => '',
+            'min_max_step'=> '1,50,1',
+            'class'       => '',
+            'condition'   => '',
+            'operator'    => 'and'
+          ),
     )
   );
   

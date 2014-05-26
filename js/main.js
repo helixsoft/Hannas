@@ -19,9 +19,18 @@
     var $container =$('#container');
     $container.imagesLoaded(function(){
       $container.masonry({
-        columnWidth: jQuery(document).width() > 800 ? 265 : jQuery(document).width() >= 600 ? 275 : 145 ,
-		gutter: 10,
+        columnWidth: jQuery(document).width() > 800 ? 255 : jQuery(document).width() >= 600 ? 275 : 145 ,
+		gutter: jQuery(document).width() > 800 ? 20 : jQuery(document).width() >= 600 ? 10 : 10 ,
 		itemSelector: '.item'
+      });
+    });
+
+    var $icontainer =$('#icontainer');
+    $icontainer.imagesLoaded(function(){
+      $icontainer.masonry({
+        columnWidth: jQuery(document).width() > 800 ? 255 : jQuery(document).width() >= 600 ? 275 : 145 ,
+    gutter: jQuery(document).width() > 800 ? 20 : jQuery(document).width() >= 600 ? 10 : 10 ,
+    itemSelector: '.item'
       });
     });
 

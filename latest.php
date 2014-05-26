@@ -10,40 +10,40 @@ if ( is_single() ) {
 					if(!empty($result)){
 						 $args=array(
 					      'post__not_in' => array($post->ID),
-					      'showposts'=>20,
 					      'caller_get_posts'=>1,
-					      'category__in'=>$result[0]
+					      'category__in'=>$result[0],
+					      'posts_per_page'    =>  ot_get_option( 'number_of_latest_in_single'),
 					    );
 					}else{
 						$args=array(
 					      'post__not_in' => array($post->ID),
-					      'showposts'=>20,
 					      'caller_get_posts'=>1,
-					      'cat'=>'cat='.ot_get_option( 'exclude_cat')
+					      'cat'=>'cat='.ot_get_option( 'exclude_cat'),
+					      'posts_per_page'    =>  ot_get_option( 'number_of_latest_in_single'),
 					    );
 					}	
 				}else{
 					$args=array(
 				      'post__not_in' => array($post->ID),
-				      'showposts'=>20,
-				      'caller_get_posts'=>1
+				      'caller_get_posts'=>1,
+				      'posts_per_page'    =>  ot_get_option( 'number_of_latest_in_single'),
 				    );
 				}
 			}
 		}else{
 			$args=array(
 		      'post__not_in' => array($post->ID),
-		      'showposts'=>20,
-		      'caller_get_posts'=>1
+		      'caller_get_posts'=>1,
+		      'posts_per_page'    =>  ot_get_option( 'number_of_latest_in_single'),
 		    );
 		}
 	}
     
-    $my_query = new WP_Query($args);
-    if( $my_query->have_posts() ) { ?>
+    $wp_query = new WP_Query($args);
+    if( $wp_query->have_posts() ) { ?>
       <div id="container">
       <?php
-      while ($my_query->have_posts()) : $my_query->the_post();
+      while ($wp_query->have_posts()) : $wp_query->the_post();
       	preg_match_all('/<a[^>]+><img[^>]+>/i',$post->post_content, $result);
 		$nbImg=count($result[0]);
 		if(count($result[0])==0){
@@ -79,6 +79,7 @@ if ( is_single() ) {
 	  		</a>
 	  	</div>
        <?php
+
       endwhile;
       ?>
       </div>

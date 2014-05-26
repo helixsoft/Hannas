@@ -25,6 +25,7 @@ get_header(); ?>
 					get_template_part( 'single-page', get_post_format() );
 					comments_template();
 					get_template_part( 'latest');
+					get_template_part( 'instagram');
 				endwhile;
 			?>
 
